@@ -12,11 +12,30 @@ h1 {
     padding: 10px;
 }
 
-ul {
+.weather-container {
+    // background-color: gold;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 10px;
+    gap: 10px;
+}
+
+.weather-container img {
+    width: 100px;
+    height: 100px;
+    // background-color: orange;
+}
+
+// .weather-container ul {
+//     align-items: 
+// }
+
+.movie-container ul {
     display: flex;
 }
 
-ul li {
+.movie-container ul li {
     flex-basis: 160px;
     justify-content: space-between;
     align-items: center;
@@ -26,17 +45,17 @@ ul li {
     font-size: 14px;
     color: gray;
 }
-ul h2 {
+.movie-container ul h2 {
     font-size: 20px;
     color: black;
 }
 
-.page-main ul li a {
+.movie-container ul li a {
     display: block;
 
 }
 
-ul li img {
+.movie-container ul li img {
     border-radius: 10px;
     width: 150px;
     object-fit: cover;

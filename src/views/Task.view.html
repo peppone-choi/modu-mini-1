@@ -1,1 +1,76 @@
-<h2>Tasks</h2>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task</title>
+</head>
+<body>
+    <header>
+        <button> 
+            <i class="fa-solid fa-arrow-left"></i>
+        </button> <!-- 뒤로가기 -->
+        <h1><a href="#">Calendar</a></h1>
+        <h2><a href="#">New Task</a></h2>
+        <button> 
+            <i class="fa-solid fa-plus"></i> <!-- 할일 추가 -->
+        </button>
+    </header>
+    
+    <section>
+        <article>
+            <div>
+                <h3 >Today</h3>
+                <h3 id="today_date">today_date</h3>
+                <h3 id="today_time">today_time</h3>
+            </div>
+            <script>
+                var Target1 = document.getElementById("today_date");
+                var Target2 = document.getElementById("today_time");
+                function today_date() {
+                    var time = new Date();
+                    var month = time.getMonth();
+                    var date = time.getDate();
+                    var day = time.getDay();
+        
+                    Target1.innerText = 
+                    `${month + 1} ${date}`;
+                        
+                }
+                function today_time() {
+                    var time = new Date();
+                    var hours = time.getHours();
+                    var minutes = time.getMinutes();
+                    var seconds = time.getSeconds();
+
+                    Target2.innerText = 
+                    `${hours < 10 ? `0${hours}` : hours}:${minutes < 10 ? `0${minutes}` : minutes}:${seconds < 10 ? `0${seconds}` : seconds}`;
+                }
+                today_date();
+                today_time();
+                setInterval(today_date);
+                setInterval(today_time, 1000); // 1초마다 실행
+            </script>
+    
+            <ul>
+                <li class="day">M</li> <!-- 월 -->
+                <li class="day">T</li> <!-- 화 -->
+                <li class="day">W</li> <!-- 수 -->
+                <li class="day">T</li> <!-- 목 -->
+                <li class="day">F</li> <!-- 금 -->
+                <li class="day">S</li> <!-- 토 -->
+                <li class="day">S</li> <!-- 일 -->
+            </ul>
+        </article>
+    
+        <article>
+            <div>
+                <h1 class="task_title">title</h1>
+                <p class="start_time">start</p>
+                <p class="end_time">end</p>
+            </div>
+        </article>
+    </section>
+    
+</body>
+</html>

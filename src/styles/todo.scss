@@ -1,1 +1,150 @@
 @import "_reset";
+
+header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header div{
+    display: flex;
+    gap: 16px;
+}
+
+header div h1{
+    font-size: 40px;
+}
+
+header button img{
+    width: 32px;
+}
+
+section{
+    padding: 16px 32px;
+}
+
+.today {
+    display: flex;
+    gap: 16px;
+    font-size: 24px;
+}
+
+.calendar {
+    display: flex;
+    justify-content: space-between;
+    padding: 16px 0;
+}
+
+.calendar img {
+    width: 32px;
+}
+
+.calendar-container{
+    position: relative;
+    max-width: 1280px;
+    width: 100%;
+}
+
+ul{
+    display: flex;
+    gap: 32px;
+}
+
+ul li{
+    width: 40%;
+    height: 160px;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    border-radius: 30px;
+    gap: 8px;
+    align-items: center;
+    justify-content: center;
+}
+
+.now{
+    border: 2px solid transparent;
+    background-image: linear-gradient(#fff, #fff), linear-gradient(to top, #3922d0be, #fff);
+    background-origin: border-box;
+    background-clip: content-box, border-box;
+    border-radius: 30px;
+}
+
+ul li p{
+    font-size: 32px;
+}
+
+section h2 {
+    font-size: 28px;
+}
+
+#timeline {
+    position: relative;
+    padding: 32px 16px;
+    display: flex;
+    flex-direction: column;
+
+    .timeline-row {
+    position: relative;
+    border-top: 1px solid #ddd;
+    height: 150px;
+
+        .time {
+            position: absolute;
+            height: 32px;
+            top: -18px;
+            display: inline-block;
+            padding: 0 16px 0 0;
+            background-color: #ecedef;
+            font-size: 20px;
+        }
+
+        .time-contents {
+            position: relative;
+            // overflow: hidden;
+            display: flex;
+            flex-direction: row;
+            align-items: flex-start;
+            // align-items: center;
+            gap: 8px;
+            height: 100%;
+            padding-left: 56px;
+        }
+
+        .time-item {
+            position: relative;
+            flex: 1 auto;
+            border-radius: 16px;
+            padding: 4px 8px;
+            height: 32px;
+
+            &.middle {
+            background-color: skyblue;
+            }
+
+            &.top {
+            background-color: orange;
+            }
+
+            &.top {
+            // 아래 방식은 걸치는게 아니라,향에 위, 중간, 아래에 붙이는방식
+            // align-self: flex-start;
+            // align-self: center;
+            // align-self: flex-end;
+
+            // position: absolute;
+            // top: -50%;
+            // transform: translateY(50%);
+            // width: 50%;
+
+            top: -16px;
+            }
+
+            &.middle {
+            top: 50%;
+            transform: translateY(-50%);
+            }
+        }
+    }
+}

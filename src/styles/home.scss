@@ -1,1 +1,43 @@
 @import "_reset";
+
+h1 {
+    margin: 10px;
+    padding: 10px;
+}
+
+.box {
+    background-color: white;
+    border-radius: 10px;
+    margin: 10px;
+    padding: 10px;
+}
+
+ul {
+    display: flex;
+}
+
+ul li {
+    flex-basis: 160px;
+    justify-content: space-between;
+    align-items: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 14px;
+    color: gray;
+}
+ul h2 {
+    font-size: 20px;
+    color: black;
+}
+
+.page-main ul li a {
+    display: block;
+
+}
+
+ul li img {
+    border-radius: 10px;
+    width: 150px;
+    object-fit: cover;
+}

@@ -12,6 +12,7 @@ const TMDB_BEARER_TOKEN =
   "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJiN2FiODczNDg0MGM3ZTg0YmRlZjg3ZThjY2EwYWNjYyIsIm5iZiI6MTcyMzUwNjM1MC41OTA3NjUsInN1YiI6IjY2MTBlMTMzYjA5YmRlMDE3ZWJjYmE3NyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.91Lkyh_Yp1fow-wBetsYkgGhp6Nvw5sm8GnutDrAAE0";
 (async () => {
   const location: Location = await getLocation();
-  const WeatherData: Weather = await getWeather(location, OPEN_WEATHER_APP_ID);
+  const weatherData: Weather = await getWeather(location, OPEN_WEATHER_APP_ID);
+  console.log(weatherData);
   const movie: getNowPlayingAndUpcomingMoviesResponse = await getNowPlayingAndUpcomingMovies(1, TMDB_BEARER_TOKEN);
 })();

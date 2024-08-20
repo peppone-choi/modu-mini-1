@@ -1,1 +1,114 @@
 @import "_reset";
+
+:root {
+    --main-text : #1B1B1B;
+    --main-bg-100 : #F6F8FC;
+    --main-bg-200 : #F7ECFF;
+    --main-bg-300 : #CBFEEC;
+
+}
+
+body {
+    color: var(--main-text);
+}
+
+.container {
+    background-color: var(--main-bg-100);
+}
+
+h1 {
+    margin: 10px;
+    padding: 10px;
+}
+
+.box {
+    background-color: var(--main-bg-200);
+    border-radius: 10px;
+    margin: 10px;
+    padding: 10px;
+}
+
+.weather-container {
+    // background-color: gold;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 10px;
+    gap: 10px;
+}
+
+.weather-container img {
+    width: 200px;
+    height: 100px;
+    background-color: var(--main-bg-300);
+}
+
+.weather-container ul {
+    width: 200px;
+    height: 100px;
+    background-color: gold;
+    // vertical-align: ;
+    // padding: 30px;
+}
+
+.movie-container ul {
+    display: flex;
+}
+
+.movie-container ul li {
+    flex-basis: 160px;
+    justify-content: space-between;
+    align-items: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    // color: gray;
+    position: relative;
+
+    font-size: 14px;
+    text-align: center;
+}
+.movie-container ul h2 {
+    font-size: 20px;
+    color: black;
+}
+
+.movie-container ul li a {
+    display: block;
+}
+
+.movie-container ul li img {
+    border-radius: 10px;
+    width: 150px;
+    object-fit: cover;
+}
+
+.dday:after {
+    content: 'D-day';
+    background-color: var(--main-bg-300);
+    // opacity : 0.8;
+    // color: black;
+    position: absolute;
+    font-size: 12px;
+    right: 10px; top: 5px;
+    border-radius: 5px;
+    padding: 5px 10px;
+    
+}
+
+.nowshow:after {
+    content: '상영중';
+    background-color: var(--main-bg-300);
+    // opacity : 0.8;
+    // color: white;
+    position: absolute;
+    font-size: 12px;
+    right: 10px; top: 5px;
+    border-radius: 5px;
+    padding: 5px 10px;
+}
+
+.todo-container ul li input {
+    // width: 20px;
+    // height: 20px;
+}

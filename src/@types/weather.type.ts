@@ -1,17 +1,13 @@
 export type Weather = {
   weather: Array<WeatherData>;
   main: Array<WeatherMainData>;
-  visibility: number;
-  wind: {
-    speed: number;
-    deg: number;
-  };
   clouds: {
     all: number;
   };
   id: number;
   name: string;
   cod: number;
+  pollution: number;
 };
 
 export type WeatherData = {
@@ -24,8 +20,4 @@ export type WeatherData = {
 export type WeatherMainData = {
   temp: number;
   feels_like: number;
-  temp_min: number;
-  temp_max: number;
-  pressure: number;
-  humidity: number;
 };

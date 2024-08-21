@@ -7,7 +7,11 @@ import { getWeather } from "./utils/weather.util";
 import { getNowPlayingAndUpcomingMovies } from "./utils/movie.util";
 import { getNowPlayingAndUpcomingMoviesResponse } from "./@types/movie.type";
 import { KAKAO_APP_KEY, OPEN_WEATHER_APP_ID, TMDB_BEARER_TOKEN } from "./config/config";
-import { $ } from "./elements/home.element.ts";
+import "./elements/home.element.ts";
+
+const weatherImages = {
+  "rain" : "../public/img/weather/Light bg/DAY shower rain.svg",
+};
 
 (async () => {
   const location: Location = await getLocation();
@@ -17,10 +21,12 @@ import { $ } from "./elements/home.element.ts";
   const movieData: getNowPlayingAndUpcomingMoviesResponse = await getNowPlayingAndUpcomingMovies(1, TMDB_BEARER_TOKEN);
   console.log(movieData);
 
+  region.textContent = "위치 : " + weatherData.region;
   temp.textContent = "온도 : " + weatherData.temp;
   weather.textContent = "날씨 : " + weatherData.weather;
   pollution.textContent = "미세먼지 : " + weatherData.pollution;
-
+  
+  weatherIcon.src = weatherImages.rain;
   
   movieData.results.slice(0, 3 ).forEach((movieItem) => {
     const liElement = document.createElement("li");
@@ -42,7 +48,24 @@ import { $ } from "./elements/home.element.ts";
     movies.appendChild(liElement);
 
   });
-
-
-
 })();
+
+// function getMeatherImage(weatherCondition) {
+//   return weatherImages[weatherCondition.toLowerCase ]
+
+// }
+
+// function getWeatherImage(weatherCondition: WeatherCondition): string {
+//   return weatherImages[weatherCondition] || "images/default.jpg";
+// }
+
+// function setWeatherImage(weatherCondition: WeatherCondition): void {
+//   const imageElement = document.querySelector<HTMLImageElement>("#weather-image");
+  
+//   if (imageElement) {
+//     const imageUrl = getWeatherImage(weatherCondition);
+//     imageElement.src = imageUrl;
+//   } else {
+//     console.error("이미지 요소를 찾을 수 없습니다.");
+//   }
+// }

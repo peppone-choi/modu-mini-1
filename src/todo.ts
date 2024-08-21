@@ -5,8 +5,8 @@ const timeline = document.querySelector("#timeline");
 const dayTimeList: Array<string> = [];
 const timelineHtmlList: Array<string> = [];
 for (let i = 0; i < 24; i++) {
-  dayTimeList.push(`${i}:00`);
-  dayTimeList.push(`${i}:30`);
+  dayTimeList.push(`${String(i).padStart(2, "0")}:00`);
+  dayTimeList.push(`${String(i).padStart(2, "0")}:30`);
 }
 
 const renderTimeLine = () => {

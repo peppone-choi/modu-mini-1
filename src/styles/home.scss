@@ -53,33 +53,26 @@ h1 {
 
 .movie-container ul {
     display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
 }
 
 .movie-container ul li {
-    flex-basis: 160px;
-    justify-content: space-between;
-    align-items: center;
+    flex-basis: calc(33%);
+    // display: block;
     overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    // color: gray;
-    position: relative;
+    // text-overflow: ellipsis;
+    // white-space: nowrap;
 
-    font-size: 14px;
+    // font-size: 14px;
     text-align: center;
-}
-.movie-container ul h2 {
-    font-size: 20px;
-    color: black;
-}
-
-.movie-container ul li a {
-    display: block;
 }
 
 .movie-container ul li img {
     border-radius: 10px;
-    width: 150px;
+    width: 100%;
+    height: auto;
     object-fit: cover;
 }
 

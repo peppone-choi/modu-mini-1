@@ -50,17 +50,17 @@ import element from "./elements/home.element.ts";
 
     if(movieItem.isNowPlaying)
     {
-      imgElement.classList.add("nowshow");
+      liElement.classList.add("nowshow");
     }
     else
     {
-      imgElement.classList.add("dday");
+      liElement.classList.add("dday");
     }
 
-    const titleText = document.createTextNode(movieItem.title);
+    // const titleText = document.createTextNode(movieItem.title);
 
     liElement.appendChild(imgElement);
-    liElement.appendChild(titleText);
+    // liElement.appendChild(titleText);
 
     element.movies.appendChild(liElement);
   });

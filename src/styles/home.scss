@@ -81,12 +81,13 @@ h2 {
 
 .movie-container ul {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: center;
     gap: 10px;
 }
 
 .movie-container ul li {
+    width: 500px;
     flex-basis: calc(33%);
     // display: block;
     overflow: hidden;
@@ -97,6 +98,8 @@ h2 {
     font-size: 20px;
     font-weight: bold;
     text-align: center;
+
+    position: relative;
 }
 
 .movie-container ul li img {
@@ -108,22 +111,21 @@ h2 {
 }
 
 .dday:after {
-    content: 'D-day';
+    content: '상영예정';
     background-color: var(--main-bg-300);
     position: absolute;
     font-size: 12px;
-    right: 10px; top: 5px;
+    right: 5px; top: 5px;
     border-radius: 5px;
     padding: 5px 10px;
-    
 }
 
 .nowshow:after {
     content: '상영중';
-    background-color: var(--main-bg-300);
+    background-color: var(--main-bg-200);
     position: absolute;
     font-size: 12px;
-    right: 10px; top: 5px;
+    right: 5px; top: 5px;
     border-radius: 5px;
     padding: 5px 10px;
 }

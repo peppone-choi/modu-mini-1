@@ -4,11 +4,11 @@
 <section class="box">
     <h2>날씨</h2>
     <div class="weather-container">
-        <img src="#" alt="weather1">
+        <img src="#" alt="weather1" id="weatherIcon">
         <ul>
-            <li>온도</li>
-            <li>날씨</li>
-            <li>미세먼지</li>
+            <li id="temp">온도</li>
+            <li id="weather">날씨</li>
+            <li id="pollution">미세먼지</li>
         </ul>
     </div>
     
@@ -17,17 +17,13 @@
 <section class="box">
     <h2>영화</h2>
     <div class="movie-container">
-        <ul>
+        <ul id="movies">
             <li class="dday">
-                <a href="#">
-                    <img src="http://ghjeon.dothome.co.kr/wavve_original/images/poster_1.jpg" alt="image1">
-                </a>
+                <img src="http://ghjeon.dothome.co.kr/wavve_original/images/poster_1.jpg" alt="image1">
                 틀린그림찾기
             </li>
             <li class="nowshow">
-                <a href="#">
-                    <img src="http://ghjeon.dothome.co.kr/wavve_original/images/poster_6.jpg" alt="image2">
-                </a>
+                <img src="http://ghjeon.dothome.co.kr/wavve_original/images/poster_6.jpg" alt="image2">
                 스택폴
             </li>
         </ul>
@@ -37,7 +33,7 @@
 <section class="box">
     <h2>할일</h2>
     <div class="todo-container">
-        <ul>
+        <ul id="todos">
             <li>
                 <input type="checkbox"> </input>
                 <span>할일1</span>

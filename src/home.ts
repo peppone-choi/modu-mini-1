@@ -7,8 +7,10 @@ import { getWeather } from "./utils/weather.util";
 import { getNowPlayingAndUpcomingMovies } from "./utils/movie.util";
 import { getNowPlayingAndUpcomingMoviesResponse } from "./@types/movie.type";
 import { KAKAO_APP_KEY, OPEN_WEATHER_APP_ID, TMDB_BEARER_TOKEN } from "./config/config";
+import "./elements/home.element.ts";
 
 (async () => {
+  console.log(movies);
   const location: Location = await getLocation();
   console.log(location);
   const weatherData: Weather = await getWeather(location, OPEN_WEATHER_APP_ID, KAKAO_APP_KEY);

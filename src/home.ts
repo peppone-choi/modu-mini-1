@@ -7,7 +7,7 @@ import { getWeather } from "./utils/weather.util";
 import { getNowPlayingAndUpcomingMovies } from "./utils/movie.util";
 import { getNowPlayingAndUpcomingMoviesResponse } from "./@types/movie.type";
 import { KAKAO_APP_KEY, OPEN_WEATHER_APP_ID, TMDB_BEARER_TOKEN, weatherIconMap } from "./config/config";
-import "./elements/home.element.ts";
+import element from "./elements/home.element.ts";
 
 (async () => {
   const location: Location = await getLocation();
@@ -17,10 +17,10 @@ import "./elements/home.element.ts";
   const movieData: getNowPlayingAndUpcomingMoviesResponse = await getNowPlayingAndUpcomingMovies(1, TMDB_BEARER_TOKEN);
   console.log(movieData);
 
-  temp.textContent = "온도 : " + weatherData.temp;
-  weather.textContent = "날씨 : " + weatherData.weather;
-  pollution.textContent = "미세먼지 : " + weatherData.pollution;
-  weatherIcon.src = `/img/weather/Light bg/${weatherIconMap.get(weatherData.weatherIcon)}`;
+  element.temp.textContent = "온도 : " + weatherData.temp;
+  element.weather.textContent = "날씨 : " + weatherData.weather;
+  element.pollution.textContent = "미세먼지 : " + weatherData.pollution;
+  element.weatherIcon.src = `/img/weather/Light bg/${weatherIconMap.get(weatherData.weatherIcon)}`; // 날씨 아이콘 (맵으로 생성 후 가져옴)
   movieData.results.slice(0, 3).forEach((movieItem) => {
     const liElement = document.createElement("li");
 
@@ -38,6 +38,6 @@ import "./elements/home.element.ts";
     liElement.appendChild(imgElement);
     liElement.appendChild(titleText);
 
-    movies.appendChild(liElement);
+    element.movies.appendChild(liElement);
   });
 })();

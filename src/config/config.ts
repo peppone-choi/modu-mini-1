@@ -3,6 +3,7 @@ export const TMDB_BEARER_TOKEN =
   "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJiN2FiODczNDg0MGM3ZTg0YmRlZjg3ZThjY2EwYWNjYyIsIm5iZiI6MTcyMzUwNjM1MC41OTA3NjUsInN1YiI6IjY2MTBlMTMzYjA5YmRlMDE3ZWJjYmE3NyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.91Lkyh_Yp1fow-wBetsYkgGhp6Nvw5sm8GnutDrAAE0";
 export const KAKAO_APP_KEY = "d1b5860c56f56b199f2934b432965880";
 
+// 날씨 아이콘 맵
 export const weatherIconMap = new Map<string, string>([
   ["01d", "DAY clear sky.svg"],
   ["02d", "DAY few clouds.svg"],

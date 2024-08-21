@@ -5,8 +5,8 @@ const timeline = document.querySelector("#timeline");
 const dayTimeList: Array<string> = [];
 const timelineHtmlList: Array<string> = [];
 const modal = document.querySelector(".modal");
-const modalBody = document.querySelector(".modal_body");
 const addTaskButton = document.querySelector(".add-task");
+const addTastItemButton = document.querySelector(".add-task-item");
 for (let i = 0; i < 24; i++) {
   dayTimeList.push(`${String(i).padStart(2, "0")}:00`);
   dayTimeList.push(`${String(i).padStart(2, "0")}:30`);

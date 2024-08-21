@@ -5,6 +5,7 @@ const timeline = document.querySelector("#timeline");
 const dayTimeList: Array<string> = [];
 const timelineHtmlList: Array<string> = [];
 const modal = document.querySelector(".modal");
+const modalBody = document.querySelector(".modal_body");
 const addTaskButton = document.querySelector(".add-task");
 for (let i = 0; i < 24; i++) {
   dayTimeList.push(`${String(i).padStart(2, "0")}:00`);
@@ -29,6 +30,12 @@ const renderTimeLine = () => {
 
 addTaskButton?.addEventListener("click", () => {
   modal?.setAttribute("style", "display: block");
+});
+
+modal?.addEventListener("click", (e) => {
+  if (e.target === modal) {
+    modal?.setAttribute("style", "display: none");
+  }
 });
 
 renderTimeLine();

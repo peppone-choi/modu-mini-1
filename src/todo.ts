@@ -11,14 +11,17 @@ for (let i = 0; i < 24; i++) {
 
 const renderTimeLine = () => {
   dayTimeList.forEach((time) => {
-    timelineHtmlList.push(`
-          <div class="timeline-row" data-time="${time}">
+    const temp = document.createElement("div");
+    temp.innerHTML = `
+      <div class="timeline-row" data-time="${time}">
             <span class="time">${time}</span>
             <div class="time-contents"></div>
-        </div>`);
+        </div>
+      `;
+    timelineHtmlList.push(temp.innerHTML);
   });
   if (timeline) {
-    timeline.innerHTML = timelineHtmlList.join("");
+    timeline.appendChild(document.createRange().createContextualFragment(timelineHtmlList.join("")));
   }
 };
 

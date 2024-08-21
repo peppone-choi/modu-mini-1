@@ -24,3 +24,12 @@ export const weatherIconMap = new Map<string, string>([
   ["13n", "NIGHT snow.svg"],
   ["50n", "NIGHT mist.svg"],
 ]);
+
+// 미세먼지 맵 (1: 좋음, 2: 괜찮음, 3: 보통, 4: 나쁨, 5: 최악)
+export const pollutionMap = new Map<string, string>([
+  ["1", "좋음"],
+  ["2", "괜찮음"],
+  ["3", "보통"],
+  ["4", "나쁨"],
+  ["5", "최악"],
+]);

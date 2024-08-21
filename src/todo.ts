@@ -6,7 +6,12 @@ const dayTimeList: Array<string> = [];
 const timelineHtmlList: Array<string> = [];
 const modal = document.querySelector(".modal");
 const addTaskButton = document.querySelector(".add-task");
-const addTastItemButton = document.querySelector(".add-task-item");
+const taskTitleInput = document.querySelector("#task-title");
+const taskStartDate = document.querySelector("#start-date");
+const taskStartTime = document.querySelector("#start-time");
+const taskEndTime = document.querySelector("#end-time");
+const addTaskItemButton = document.querySelector(".add-task-item");
+
 for (let i = 0; i < 24; i++) {
   dayTimeList.push(`${String(i).padStart(2, "0")}:00`);
   dayTimeList.push(`${String(i).padStart(2, "0")}:30`);
@@ -36,6 +41,21 @@ modal?.addEventListener("click", (e) => {
   if (e.target === modal) {
     modal?.setAttribute("style", "display: none");
   }
+});
+
+addTaskItemButton?.addEventListener("click", () => {
+  if (!(taskTitleInput instanceof HTMLInputElement) || !(taskStartDate instanceof HTMLInputElement) || !(taskStartTime instanceof HTMLInputElement) || !(taskEndTime instanceof HTMLInputElement)) {
+    return;
+  } // 타입 가드
+  if (taskTitleInput.value == "" || taskStartDate.value == "" || taskStartTime.value == "" || taskEndTime.value == "") {
+    alert("모든 항목을 입력해주세요");
+    return;
+  } // 빈 값 체크
+  console.log(taskTitleInput.value);
+  console.log(taskStartDate.value);
+  console.log(taskStartTime.value);
+  console.log(taskEndTime.value);
+  modal?.setAttribute("style", "display: none");
 });
 
 renderTimeLine();

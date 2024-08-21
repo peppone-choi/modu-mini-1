@@ -4,6 +4,8 @@ import "./styles/todo.scss";
 const timeline = document.querySelector("#timeline");
 const dayTimeList: Array<string> = [];
 const timelineHtmlList: Array<string> = [];
+const modal = document.querySelector(".modal");
+const addTaskButton = document.querySelector(".add-task");
 for (let i = 0; i < 24; i++) {
   dayTimeList.push(`${String(i).padStart(2, "0")}:00`);
   dayTimeList.push(`${String(i).padStart(2, "0")}:30`);
@@ -24,5 +26,9 @@ const renderTimeLine = () => {
     timeline.appendChild(document.createRange().createContextualFragment(timelineHtmlList.join("")));
   }
 };
+
+addTaskButton?.addEventListener("click", () => {
+  modal?.setAttribute("style", "display: block");
+});
 
 renderTimeLine();

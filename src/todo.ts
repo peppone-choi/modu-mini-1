@@ -1,6 +1,8 @@
 import "./main";
 import "./styles/todo.scss";
 import { Todo } from "./models/todo.model";
+import { render } from "sass";
+import dayjs from "dayjs";
 
 const timeline = document.querySelector("#timeline");
 const dayTimeList: Array<string> = [];
@@ -14,11 +16,37 @@ const taskStartTime = document.querySelector("#start-time");
 const taskEndTime = document.querySelector("#end-time");
 const allDayCheck = document.querySelector("#allday");
 const addTaskItemButton = document.querySelector(".add-task-item");
+const calenderContainer = document.querySelector(".calendar-container");
 const todoList = JSON.parse(localStorage.getItem("todo") ?? JSON.stringify([])); // 로컬스토리지에 있는 todo를 가져와서 파싱
 for (let i = 0; i < 24; i++) {
   dayTimeList.push(`${String(i).padStart(2, "0")}:00`);
   dayTimeList.push(`${String(i).padStart(2, "0")}:30`);
 }
+
+// 오늘 날짜
+const today = dayjs(new Date());
+let selectedDate = today.format("YYYY-MM-DD");
+// 요일 배열
+const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+
+const renderCalendar = () => {
+  const temp = document.createElement("ul");
+  const renderDayList: Array<string> = [];
+  days.forEach((day, i) => {
+    renderDayList.push(`<li data-date="${dayjs(selectedDate)
+      .add(i - dayjs(selectedDate).day(), "day")
+      .format("YYYY-MM-DD")}">
+                        <button class="${day}">
+                            <p class="date">${dayjs(selectedDate).date() + (i - today.day())}</p>
+                            <p>${day}</p>
+                        </button>
+                    </li>`);
+  });
+  temp.innerHTML = renderDayList.join("");
+  if (calenderContainer instanceof HTMLElement) {
+    calenderContainer.appendChild(temp);
+  }
+};
 
 const renderTimeLine = () => {
   dayTimeList.forEach((time) => {
@@ -118,25 +146,10 @@ addTaskItemButton?.addEventListener("click", () => {
 });
 
 renderTimeLine();
-
-// 오늘 날짜
-const today = new Date();
-const todayDate = today.getDate();
-const todayDay = today.getDay();
-
-// 요일 배열
-const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-
-// 이번주 날짜 설정
-const calendarButtons = document.querySelectorAll('.calendar-container .date');
-calendarButtons.forEach((button, index) => {
-  const date = new Date(today);
-  date.setDate(todayDate - todayDay + index + 1); // 월요일을 시작으로 설정
-  button.textContent = date.getDate().toString(); // 숫자를 문자열로 변환하여 할당
-});
+renderCalendar();
 
 // 오늘 날짜 now 클래스에 입력
-const nowButton = document.querySelector('.calendar-container .now .date');
-if (nowButton) {
-  nowButton.textContent = todayDate.toString(); // 숫자를 문자열로 변환하여 할당
+const nowButton = document.querySelector(".calendar-container ul li[data-date='" + today.format("YYYY-MM-DD") + "']");
+if (nowButton instanceof HTMLElement) {
+  nowButton.classList.add("now");
 }

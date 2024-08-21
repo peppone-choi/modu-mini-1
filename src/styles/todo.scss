@@ -52,12 +52,12 @@ section {
 .calendar-container {
   position: relative;
   max-width: 1280px;
-  width: 100%;
+  min-width: 320px;
 }
 
 ul {
   display: flex;
-  gap: 3dvw;
+  gap: 2dvw;
   width: 100%;
 }
 

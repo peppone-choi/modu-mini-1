@@ -20,7 +20,7 @@ import "./elements/home.element.ts";
   temp.textContent = "온도 : " + weatherData.temp;
   weather.textContent = "날씨 : " + weatherData.weather;
   pollution.textContent = "미세먼지 : " + weatherData.pollution;
-  weatherIcon.src = `../public/img/weather/Light bg/${weatherIconMap.get(weatherData.weatherIcon)}`;
+  weatherIcon.src = `/img/weather/Light bg/${weatherIconMap.get(weatherData.weatherIcon)}`;
   movieData.results.slice(0, 3).forEach((movieItem) => {
     const liElement = document.createElement("li");
 

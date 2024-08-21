@@ -118,3 +118,25 @@ addTaskItemButton?.addEventListener("click", () => {
 });
 
 renderTimeLine();
+
+// 오늘 날짜
+const today = new Date();
+const todayDate = today.getDate();
+const todayDay = today.getDay();
+
+// 요일 배열
+const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+
+// 이번주 날짜 설정
+const calendarButtons = document.querySelectorAll('.calendar-container .date');
+calendarButtons.forEach((button, index) => {
+  const date = new Date(today);
+  date.setDate(todayDate - todayDay + index + 1); // 월요일을 시작으로 설정
+  button.textContent = date.getDate().toString(); // 숫자를 문자열로 변환하여 할당
+});
+
+// 오늘 날짜 now 클래스에 입력
+const nowButton = document.querySelector('.calendar-container .now .date');
+if (nowButton) {
+  nowButton.textContent = todayDate.toString(); // 숫자를 문자열로 변환하여 할당
+}

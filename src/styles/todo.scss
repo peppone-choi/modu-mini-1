@@ -57,10 +57,12 @@ section {
 
 ul {
   display: flex;
-  gap: 32px;
+  gap: 3dvw;
+  width: 100%;
 }
 
 ul li {
+  width: 40dvw;
   height: 160px;
   background-color: white;
   border-radius: 30px;

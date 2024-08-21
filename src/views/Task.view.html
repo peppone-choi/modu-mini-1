@@ -1,1 +1,107 @@
-<h2>Tasks</h2>
+<header>
+    <div>
+        <button> 
+            <img src="../../icon_arrow_left.svg" alt="홈 돌아가기">
+        </button>
+        <h1><a href="../views/Home.view.html">Todo</a></h1>
+    </div>
+    <div>
+        <h2><a href="#">New Task</a></h2>
+        <button> 
+            <img src="../../icon_plus.svg" alt="Task 추가">
+        </button>
+    </div>
+</header>
+
+<section>
+    <article>
+        <div class="today">
+            <h3>Today</h3>
+            <h3 id="today_date"></h3>
+        </div>
+        <script>
+            var Target = document.getElementById("today_date");
+            var time = new Date();
+
+            function today_date() {
+                var month = time.getMonth();
+                var date = time.getDate();
+                var day = time.getDay();
+
+                var hours = time.getHours();
+                var minutes = time.getMinutes();
+    
+                Target.innerText = 
+                `${month + 1}월 ${date}일 ${hours < 10 ? `0${hours}` : hours}시 ${minutes < 10 ? `0${minutes}` : minutes}분`;
+                    
+            }
+            today_date();
+            setInterval(today_date);
+        </script>
+
+        <div class="calendar">
+            <button> 
+                <img src="../../icon_arrow_left.svg" alt="저번주">
+            </button>
+            <div class="calendar-container">
+                <ul>
+                    <li>
+                        <p class="date">date</p>
+                        <p class="Mon">Mon</p>
+                    </li> 
+                    <li class="now">
+                        <p class="date">date</p>
+                        <p class="Tue">Tue</p>
+                    </li> 
+                    <li>
+                        <p class="date">date</p>
+                        <p class="Wed">Wed</p>
+                    </li> 
+                    <li>
+                        <p class="date">date</p>
+                        <p class="Thu">Thu</p>
+                    </li>
+                    <li>
+                        <p class="date">date</p>
+                        <p class="Fri">Fri</p>
+                    </li>
+                    <li>
+                        <p class="date">date</p>
+                        <p class="Sat">Sat</p>
+                    </li> 
+                    <li>
+                        <p class="date">date</p>
+                        <p class="Sun">Sun</p>
+                    </li> 
+                </ul>
+            </div>
+
+            <button>
+                <img src="../../icon_arrow_right.svg" alt="다음주">
+            </button>
+        </div>
+    </article>
+
+    <h2>Timeline</h2>
+    <article id="timeline">
+        <div class="timeline-row" data-time="09:00">
+            <span class="time">09:00</span>
+            <div class="time-contents"></div>
+        </div>
+        <div class="timeline-row" data-time="09:30">
+            <span class="time">09:30</span>
+            <div class="time-contents">
+                <div class="time-item middle" data-item-time="09:45">
+                    할일 1
+                </div>
+                <div class="time-item top" data-item-time="09:30">
+                    할일 2
+                </div>
+            </div>
+        </div>
+        <div class="timeline-row" data-time="09:30">
+            <span class="time">10:00</span>
+            <div class="time-contents"></div>
+        </div>
+    </article>
+</section>

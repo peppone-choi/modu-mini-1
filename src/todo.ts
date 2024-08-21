@@ -74,6 +74,10 @@ addTaskItemButton?.addEventListener("click", () => {
     const newTodoList = [...oldTodo, newTodo]; // 기존 todo와 새로운 todo를 합침
     localStorage.setItem("todo", JSON.stringify(newTodoList)); // 합친 todo를 다시 저장
   }
+  taskTitleInput.value = "";
+  taskStartDate.value = "";
+  taskStartTime.value = "";
+  taskEndTime.value = "";
   modal?.setAttribute("style", "display: none");
 });
 

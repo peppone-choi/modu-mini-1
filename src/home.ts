@@ -7,11 +7,7 @@ import { getWeather } from "./utils/weather.util";
 import { getNowPlayingAndUpcomingMovies } from "./utils/movie.util";
 import { getNowPlayingAndUpcomingMoviesResponse } from "./@types/movie.type";
 import { KAKAO_APP_KEY, OPEN_WEATHER_APP_ID, TMDB_BEARER_TOKEN } from "./config/config";
-import "./elements/home.element.ts";
-
-const weatherImages = {
-  "rain" : "../public/img/weather/Light bg/DAY shower rain.svg",
-};
+import element from "./elements/home.element.ts";
 
 (async () => {
   const location: Location = await getLocation();
@@ -21,23 +17,21 @@ const weatherImages = {
   const movieData: getNowPlayingAndUpcomingMoviesResponse = await getNowPlayingAndUpcomingMovies(1, TMDB_BEARER_TOKEN);
   console.log(movieData);
 
-  region.textContent = "위치 : " + weatherData.region;
-  temp.textContent = "온도 : " + weatherData.temp;
-  weather.textContent = "날씨 : " + weatherData.weather;
-  pollution.textContent = "미세먼지 : " + weatherData.pollution;
-  
-  weatherIcon.src = weatherImages.rain;
-  
-  movieData.results.slice(0, 3 ).forEach((movieItem) => {
+  element.region.textContent = "위치 : " + weatherData.region;
+  element.temp.textContent = "온도 : " + weatherData.temp;
+  element.weather.textContent = "날씨 : " + weatherData.weather;
+  element.pollution.textContent = "미세먼지 : " + weatherData.pollution;
+  element.weatherIcon.src = `/img/weather/Light bg/${weatherIconMap.get(weatherData.weatherIcon)}`; // 날씨 아이콘 (맵으로 생성 후 가져옴)
+  movieData.results.slice(0, 3).forEach((movieItem) => {
     const liElement = document.createElement("li");
 
     liElement.classList.add("movieItem");
 
     const imgElement = document.createElement("img");
 
-    imgElement.src = 'https://image.tmdb.org/t/p/w300' + movieItem.poster_path;
-    
-    console.log('https://image.tmdb.org/t/p/w500' + movieItem.poster_path);
+    imgElement.src = "https://image.tmdb.org/t/p/w300" + movieItem.poster_path;
+
+    console.log("https://image.tmdb.org/t/p/w500" + movieItem.poster_path);
     imgElement.alt = movieItem.title;
 
     const titleText = document.createTextNode(movieItem.title);
@@ -45,8 +39,7 @@ const weatherImages = {
     liElement.appendChild(imgElement);
     liElement.appendChild(titleText);
 
-    movies.appendChild(liElement);
-
+    element.movies.appendChild(liElement);
   });
 })();
 

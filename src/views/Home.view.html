@@ -4,16 +4,20 @@
 <section class="box">
     <h2>날씨</h2>
     <div class="weather-container">
-        <img src="#" alt="weather1" id="weatherIcon">
-        <ul>
-            <li id="region">위치</li>
-            <li id="temp">온도</li>
-            <li id="weather">날씨</li>
-            <li id="pollution">미세먼지</li>
-        </ul>
+
+        <img src="#" alt="weatherImage" id="weatherIcon">
+        <article>
+            <div id="temp" class="tempToday">온도</div>
+            <div id="weather" class="weatherToday">날씨</div>
+        </article>
+        <article>
+            <div id="region" class="regionCurrent">위치</div>
+            <div class="pollutionGroup">
+                <span>미세</span>
+                <div id="pollution">미세먼지</div>
+            </div>
+        </article>
     </div>
-    
-    <!-- <a href="#" class="btn-more">더보기</a> -->
 </section>
 <section class="box">
     <h2>영화</h2>

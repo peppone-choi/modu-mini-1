@@ -17,14 +17,28 @@ import element from "./elements/home.element.ts";
   const movieData: getNowPlayingAndUpcomingMoviesResponse = await getNowPlayingAndUpcomingMovies(1, TMDB_BEARER_TOKEN);
   console.log(movieData);
 
-  element.region.textContent = "위치 : " + weatherData.region;
-  element.temp.textContent = "온도 : " + weatherData.temp;
-  element.weather.textContent = "날씨 : " + weatherData.weather;
-  element.pollution.textContent = "미세먼지 : " + weatherData.pollution;
+  element.region.textContent = weatherData.region;
+  element.temp.textContent = Math.ceil(weatherData.temp * 10) / 10 + "°";
+  element.weather.textContent = weatherData.weather;
+  element.pollution.textContent = weatherData.pollution;
+
+  switch (weatherData.pollution) {
+    case "나쁨": 
+    case "최악": 
+      element.pollution.style.color = "red";
+      break;
+    case "좋음": 
+    case "괜찮음": 
+    case "보통": 
+      element.pollution.style.color = "blue";
+      break;
+  }
+
   element.weatherIcon.src = `/img/weather/Light bg/${weatherIconMap.get(weatherData.weatherIcon)}`; // 날씨 아이콘 (맵으로 생성 후 가져옴)
+
   movieData.results.slice(0, 3).forEach((movieItem) => {
     const liElement = document.createElement("li");
-
+    
     liElement.classList.add("movieItem");
 
     const imgElement = document.createElement("img");
@@ -34,6 +48,15 @@ import element from "./elements/home.element.ts";
     console.log("https://image.tmdb.org/t/p/w500" + movieItem.poster_path);
     imgElement.alt = movieItem.title;
 
+    if(movieItem.isNowPlaying)
+    {
+      imgElement.classList.add("nowshow");
+    }
+    else
+    {
+      imgElement.classList.add("dday");
+    }
+
     const titleText = document.createTextNode(movieItem.title);
 
     liElement.appendChild(imgElement);
@@ -42,23 +65,3 @@ import element from "./elements/home.element.ts";
     element.movies.appendChild(liElement);
   });
 })();
-
-// function getMeatherImage(weatherCondition) {
-//   return weatherImages[weatherCondition.toLowerCase ]
-
-// }
-
-// function getWeatherImage(weatherCondition: WeatherCondition): string {
-//   return weatherImages[weatherCondition] || "images/default.jpg";
-// }
-
-// function setWeatherImage(weatherCondition: WeatherCondition): void {
-//   const imageElement = document.querySelector<HTMLImageElement>("#weather-image");
-  
-//   if (imageElement) {
-//     const imageUrl = getWeatherImage(weatherCondition);
-//     imageElement.src = imageUrl;
-//   } else {
-//     console.error("이미지 요소를 찾을 수 없습니다.");
-//   }
-// }

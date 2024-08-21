@@ -12,7 +12,16 @@ export class Todo {
     this.time = time;
     this.isCompleted = false;
   }
-  setCompleted() {
-    this.isCompleted = true;
+  toggleCompleted() {
+    this.isCompleted = !this.isCompleted;
+  }
+  updateContent(content: string) {
+    this.content = content;
+  }
+  updateDay(day: string) {
+    this.day = day;
+  }
+  updateTime(time: string) {
+    this.time = time;
   }
 }

@@ -1,6 +1,8 @@
 import dayjs from "dayjs";
 import "./main";
 import "./styles/todo.scss";
+import { Todo } from "./models/todo.model";
+import { Value } from "sass";
 const timeline = document.querySelector("#timeline");
 const dayTimeList: Array<string> = [];
 const timelineHtmlList: Array<string> = [];
@@ -55,6 +57,20 @@ addTaskItemButton?.addEventListener("click", () => {
   console.log(taskStartDate.value);
   console.log(taskStartTime.value);
   console.log(taskEndTime.value);
+
+  const newTodo = new Todo({
+    content : taskTitleInput.value,
+    day : taskStartDate.value,
+    startTime : taskStartTime.value,
+    endTime : taskEndTime.value,
+  });
+  console.log(newTodo);
+
+  if (!localStorage.getItem("todo")) return;
+  const oldTodo = JSON.parse(localStorage.getItem("todo") as string);
+  console.log(oldTodo);
+
+  localStorage.setItem("todo", JSON.stringify({id: newTodo.id, data: newTodo}))
   modal?.setAttribute("style", "display: none");
 });
 

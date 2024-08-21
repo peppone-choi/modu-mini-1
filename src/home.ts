@@ -6,7 +6,7 @@ import { getLocation } from "./utils/location.util";
 import { getWeather } from "./utils/weather.util";
 import { getNowPlayingAndUpcomingMovies } from "./utils/movie.util";
 import { getNowPlayingAndUpcomingMoviesResponse } from "./@types/movie.type";
-import { KAKAO_APP_KEY, OPEN_WEATHER_APP_ID, TMDB_BEARER_TOKEN } from "./config/config";
+import { KAKAO_APP_KEY, OPEN_WEATHER_APP_ID, TMDB_BEARER_TOKEN, weatherIconMap } from "./config/config";
 import element from "./elements/home.element.ts";
 
 (async () => {

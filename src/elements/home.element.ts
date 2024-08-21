@@ -1,5 +1,6 @@
 const $ = {
   weatherIcon: document.querySelector("#weatherIcon") as HTMLImageElement,
+  region: document.querySelector("#region") as HTMLLIElement,
   temp: document.querySelector("#temp") as HTMLLIElement,
   weather: document.querySelector("#weather") as HTMLLIElement,
   pollution: document.querySelector("#pollution") as HTMLLIElement,

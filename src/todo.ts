@@ -75,7 +75,7 @@ addTaskItemButton?.addEventListener("click", () => {
     localStorage.setItem("todo", JSON.stringify(newTodoList)); // 합친 todo를 다시 저장
   }
   taskTitleInput.value = "";
-  taskStartDate.value = "";
+  taskStartDate.value = new Date().toISOString().slice(0, 10);
   taskStartTime.value = "";
   taskEndTime.value = "";
   modal?.setAttribute("style", "display: none");

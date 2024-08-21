@@ -14,8 +14,7 @@ const taskStartTime = document.querySelector("#start-time");
 const taskEndTime = document.querySelector("#end-time");
 const allDayCheck = document.querySelector("#allday");
 const addTaskItemButton = document.querySelector(".add-task-item");
-const todoList = JSON.parse(localStorage.getItem("todo") ?? ""); // 로컬스토리지에 있는 todo를 가져와서 파싱
-
+const todoList = JSON.parse(localStorage.getItem("todo") ?? JSON.stringify([])); // 로컬스토리지에 있는 todo를 가져와서 파싱
 for (let i = 0; i < 24; i++) {
   dayTimeList.push(`${String(i).padStart(2, "0")}:00`);
   dayTimeList.push(`${String(i).padStart(2, "0")}:30`);
@@ -52,6 +51,8 @@ allDayCheck?.addEventListener("change", (e) => {
     if (e.target.checked) {
       taskStartTime.setAttribute("disabled", "true");
       taskEndTime.setAttribute("disabled", "true");
+      taskStartTime.value = "";
+      taskEndTime.value = "";
     } else {
       taskStartTime.removeAttribute("disabled");
       taskEndTime.removeAttribute("disabled");
@@ -73,19 +74,28 @@ addTaskItemButton?.addEventListener("click", () => {
   if (
     taskTitleInput.value == "" ||
     taskStartDate.value == "" ||
-    (taskStartDate.value === taskEndDate.value && (taskEndTime.value === "" || taskStartTime.value === "")) ||
-    (!allDayCheck.checked && (taskStartTime.value == "" || taskEndTime.value == ""))
+    (taskStartDate.value === taskEndDate.value && (taskEndTime.value === "" || taskStartTime.value === "") && !allDayCheck.checked) ||
+    (!allDayCheck.checked && taskStartTime.value == "" && taskEndTime.value == "")
   ) {
     alert("모든 항목을 입력해주세요");
     return;
   } // 빈 값 체크
 
+  if (taskStartDate.value > taskEndDate.value) {
+    alert("시작일이 종료일보다 늦습니다.");
+    return;
+  } // 시작일 종료일 비교
+  if (taskStartDate.value === taskEndDate.value && taskStartTime.value > taskEndTime.value) {
+    alert("시작시간이 종료시간보다 늦습니다.");
+    return;
+  }
   const newTodo = new Todo({
+    id: todoList.length === 0 ? 0 : todoList[todoList.length - 1].id + 1,
     content: taskTitleInput.value,
     startDay: taskStartDate.value,
     endDay: taskEndDate.value,
-    startTime: taskStartTime.value,
-    endTime: taskEndTime.value,
+    startTime: taskStartTime.value === "" ? null : taskStartTime.value,
+    endTime: taskEndTime.value === "" ? null : taskEndTime.value,
   });
   if (todoList.length === 0) {
     // 로컬스토리지에 todo가 없을 때
@@ -98,6 +108,8 @@ addTaskItemButton?.addEventListener("click", () => {
   taskTitleInput.value = "";
   taskStartDate.value = new Date().toISOString().slice(0, 10);
   taskEndDate.value = new Date().toISOString().slice(0, 10);
+  taskStartTime.disabled = false;
+  taskEndTime.disabled = false;
   taskStartTime.value = "";
   taskEndTime.value = "";
   allDayCheck.checked = false;

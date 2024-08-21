@@ -1,7 +1,8 @@
 export type CreateTodoType = {
+  id: number;
   content: string;
   startDay: string;
   endDay: string;
-  startTime: string;
-  endTime: string;
+  startTime: string | null;
+  endTime: string | null;
 };

@@ -59,18 +59,21 @@ addTaskItemButton?.addEventListener("click", () => {
   console.log(taskEndTime.value);
 
   const newTodo = new Todo({
-    content : taskTitleInput.value,
-    day : taskStartDate.value,
-    startTime : taskStartTime.value,
-    endTime : taskEndTime.value,
+    content: taskTitleInput.value,
+    day: taskStartDate.value,
+    startTime: taskStartTime.value,
+    endTime: taskEndTime.value,
   });
   console.log(newTodo);
-
-  if (!localStorage.getItem("todo")) return;
-  const oldTodo = JSON.parse(localStorage.getItem("todo") as string);
-  console.log(oldTodo);
-
-  localStorage.setItem("todo", JSON.stringify({id: newTodo.id, data: newTodo}))
+  if (!localStorage.getItem("todo")) {
+    // 로컬스토리지에 todo가 없을 때
+    localStorage.setItem("todo", JSON.stringify([newTodo])); // 새로운 todo를 배열로 만들어서 저장
+  } else {
+    // 로컬스토리지에 todo가 있을 때
+    const oldTodo = JSON.parse(localStorage.getItem("todo") as string); // 로컬스토리지에 있는 todo를 가져와서 파싱
+    const newTodoList = [...oldTodo, newTodo]; // 기존 todo와 새로운 todo를 합침
+    localStorage.setItem("todo", JSON.stringify(newTodoList)); // 합친 todo를 다시 저장
+  }
   modal?.setAttribute("style", "display: none");
 });
 

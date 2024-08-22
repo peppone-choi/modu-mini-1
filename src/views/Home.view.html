@@ -4,40 +4,40 @@
 <section class="box">
     <h2>날씨</h2>
     <div class="weather-container">
-        <img src="#" alt="weather1">
-        <ul>
-            <li>온도</li>
-            <li>날씨</li>
-            <li>미세먼지</li>
-        </ul>
+
+        <img src="#" alt="weatherImage" id="weatherIcon">
+        <article>
+            <div id="temp" class="tempToday">온도</div>
+            <div id="weather" class="weatherToday">날씨</div>
+        </article>
+        <article>
+            <div id="region" class="regionCurrent">위치</div>
+            <div class="pollutionGroup">
+                <span>미세</span>
+                <div id="pollution">미세먼지</div>
+            </div>
+        </article>
     </div>
-    
-    <!-- <a href="#" class="btn-more">더보기</a> -->
 </section>
 <section class="box">
     <h2>영화</h2>
     <div class="movie-container">
-        <ul>
-            <li class="dday">
-                <a href="#">
-                    <img src="http://ghjeon.dothome.co.kr/wavve_original/images/poster_1.jpg" alt="image1">
-                </a>
+        <ul id="movies">
+            <!-- <li class="dday">
+                <img src="http://ghjeon.dothome.co.kr/wavve_original/images/poster_1.jpg" alt="image1">
                 틀린그림찾기
             </li>
             <li class="nowshow">
-                <a href="#">
-                    <img src="http://ghjeon.dothome.co.kr/wavve_original/images/poster_6.jpg" alt="image2">
-                </a>
+                <img src="http://ghjeon.dothome.co.kr/wavve_original/images/poster_6.jpg" alt="image2">
                 스택폴
-            </li>
+            </li> -->
         </ul>
     </div>
 </section>
-
 <section class="box">
     <h2>할일</h2>
     <div class="todo-container">
-        <ul>
+        <ul id="todos">
             <li>
                 <input type="checkbox"> </input>
                 <span>할일1</span>

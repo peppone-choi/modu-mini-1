@@ -1,5 +1,6 @@
 import { Location } from "../@types/location.type";
 import { Weather } from "../@types/weather.type";
+import { pollutionMap } from "../config/config";
 
 export const getWeather = async (location: Location, OPEN_WEATHER_APP_ID: string, KAKAO_APP_KEY: string): Promise<Weather> => {
   const { latitude, longitude } = location; // 위도, 경도를 가져옴.
@@ -19,7 +20,7 @@ export const getWeather = async (location: Location, OPEN_WEATHER_APP_ID: string
   pollutionUrl.searchParams.append("appid", OPEN_WEATHER_APP_ID);
   pollutionUrl.searchParams.append("lang", "kr");
   const pollutionData = await (await fetch(pollutionUrl.toString())).json();
-  data.pollution = pollutionData.list[0].main.aqi;
+  data.pollution = pollutionMap.get(pollutionData.list[0].main.aqi.toString()) || "미세먼지 정보 없음";
 
   // 위도, 경도를 이용하여 주소 정보를 가져옴. Kakao API 사용.
   const addressUrl = new URL("https://dapi.kakao.com/v2/local/geo/coord2regioncode.json");

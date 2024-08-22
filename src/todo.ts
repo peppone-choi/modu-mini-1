@@ -246,6 +246,7 @@ if (nowButton instanceof HTMLElement) {
   nowButton.classList.add("now");
 }
 
+// 선택된 날짜 selected 클래스에 입력
 const selectedButton = document.querySelector(".calendar-container ul li[data-date='" + selectedDate + "']");
 if (selectedButton instanceof HTMLElement) {
   selectedButton.classList.add("selected");

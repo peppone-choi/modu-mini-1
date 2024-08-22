@@ -245,3 +245,8 @@ const nowButton = document.querySelector(".calendar-container ul li[data-date='"
 if (nowButton instanceof HTMLElement) {
   nowButton.classList.add("now");
 }
+
+const selectedButton = document.querySelector(".calendar-container ul li[data-date='" + selectedDate + "']");
+if (selectedButton instanceof HTMLElement) {
+  selectedButton.classList.add("selected");
+}

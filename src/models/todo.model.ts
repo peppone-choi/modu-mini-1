@@ -19,22 +19,4 @@ export class Todo {
     this.isCompleted = false;
     this.allDay = create.allDay;
   } // 생성자
-  toggleCompleted() {
-    this.isCompleted = !this.isCompleted;
-  } // 완료여부 토글
-  updateContent(content: string) {
-    this.content = content;
-  } // 내용 수정
-  updateStartDay(startDay: string) {
-    this.startDay = startDay;
-  } // 시작 날짜 수정
-  updateEndDay(endDay: string) {
-    this.endDay = endDay;
-  } // 종료 날짜 수정
-  updateStartTime(startTime: string) {
-    this.startTime = startTime;
-  } // 시작 시간 수정
-  updateEndTime(endTime: string) {
-    this.endTime = endTime;
-  } // 종료 시간 수정
 }

@@ -90,7 +90,7 @@ const renderTodo = () => {
             <input type="checkbox" name="isCompleted" id="check-${todo.id}" />
             <div class="check"></div>
           </label>
-          <p class="content">${todo.content}</p>
+          <p class="content">${todo.content} ${todo.allDay ? "(하루종일)" : `(${todo.startTime} ~ ${todo.endTime})`}</p>
         </div>`;
     }
   });
@@ -192,6 +192,7 @@ addTaskItemButton?.addEventListener("click", () => {
     endDay: taskEndDate.value,
     startTime: taskStartTime.value === "" ? null : taskStartTime.value,
     endTime: taskEndTime.value === "" ? null : taskEndTime.value,
+    allDay: allDayCheck.checked,
   });
   if (todoList.length === 0) {
     // 로컬스토리지에 todo가 없을 때
@@ -217,7 +218,7 @@ addTaskItemButton?.addEventListener("click", () => {
 
 renderTimeLine();
 renderCalendar();
-// renderTodo();
+renderTodo();
 
 // 오늘 날짜 now 클래스에 입력
 const nowButton = document.querySelector(".calendar-container ul li[data-date='" + today.format("YYYY-MM-DD") + "']");

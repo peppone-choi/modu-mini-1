@@ -1,150 +1,247 @@
 @import "_reset";
 
 header {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
 }
 
-header div{
-    display: flex;
-    gap: 16px;
+header div {
+  display: flex;
+  gap: 16px;
 }
 
-header div h1{
-    font-size: 40px;
+header div h1 {
+  font-size: 40px;
 }
 
-header button img{
-    width: 32px;
+header button img {
+  width: 32px;
 }
 
-section{
-    padding: 16px 32px;
+header button {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 32px;
+  cursor: pointer;
+}
+
+section {
+  padding: 16px 32px;
 }
 
 .today {
-    display: flex;
-    gap: 16px;
-    font-size: 24px;
+  display: flex;
+  gap: 16px;
+  font-size: 24px;
 }
 
 .calendar {
-    display: flex;
-    justify-content: space-between;
-    padding: 16px 0;
+  display: flex;
+  justify-content: space-between;
+  padding: 16px 0;
 }
 
 .calendar img {
-    width: 32px;
+  width: 32px;
+  cursor: pointer;
 }
 
-.calendar-container{
-    position: relative;
-    max-width: 1280px;
-    width: 100%;
+.calendar-container {
+  position: relative;
+  max-width: 1280px;
+  min-width: 320px;
 }
 
-ul{
-    display: flex;
-    gap: 32px;
+ul {
+  display: flex;
+  gap: 2dvw;
+  width: 100%;
 }
 
-ul li{
-    width: 40%;
-    height: 160px;
-    background-color: white;
-    display: flex;
-    flex-direction: column;
-    border-radius: 30px;
-    gap: 8px;
-    align-items: center;
-    justify-content: center;
+ul li {
+  width: 40dvw;
+  height: 160px;
+  background-color: white;
+  border-radius: 30px;
+  gap: 8px;
+  position: relative;
+  flex: 1;
+  flex-shrink: 0;
 }
 
-.now{
-    border: 2px solid transparent;
-    background-image: linear-gradient(#fff, #fff), linear-gradient(to top, #3922d0be, #fff);
-    background-origin: border-box;
-    background-clip: content-box, border-box;
-    border-radius: 30px;
+ul li button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  border-radius: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
-ul li p{
-    font-size: 32px;
+.now {
+  border: 2px solid transparent;
+  background-image: linear-gradient(#fff, #fff), linear-gradient(to top, #3922d0be, #fff);
+  background-origin: border-box;
+  background-clip: content-box, border-box;
+  border-radius: 30px;
+}
+
+ul li p {
+  font-size: 24px;
 }
 
 section h2 {
-    font-size: 28px;
+  font-size: 28px;
 }
 
 #timeline {
-    position: relative;
-    padding: 32px 16px;
-    display: flex;
-    flex-direction: column;
+  position: relative;
+  padding: 32px 16px;
+  display: flex;
+  flex-direction: column;
 
-    .timeline-row {
+  .timeline-row {
     position: relative;
     border-top: 1px solid #ddd;
     height: 150px;
 
-        .time {
-            position: absolute;
-            height: 32px;
-            top: -18px;
-            display: inline-block;
-            padding: 0 16px 0 0;
-            background-color: #ecedef;
-            font-size: 20px;
-        }
-
-        .time-contents {
-            position: relative;
-            // overflow: hidden;
-            display: flex;
-            flex-direction: row;
-            align-items: flex-start;
-            // align-items: center;
-            gap: 8px;
-            height: 100%;
-            padding-left: 56px;
-        }
-
-        .time-item {
-            position: relative;
-            flex: 1 auto;
-            border-radius: 16px;
-            padding: 4px 8px;
-            height: 32px;
-
-            &.middle {
-            background-color: skyblue;
-            }
-
-            &.top {
-            background-color: orange;
-            }
-
-            &.top {
-            // 아래 방식은 걸치는게 아니라,향에 위, 중간, 아래에 붙이는방식
-            // align-self: flex-start;
-            // align-self: center;
-            // align-self: flex-end;
-
-            // position: absolute;
-            // top: -50%;
-            // transform: translateY(50%);
-            // width: 50%;
-
-            top: -16px;
-            }
-
-            &.middle {
-            top: 50%;
-            transform: translateY(-50%);
-            }
-        }
+    .time {
+      position: absolute;
+      height: 32px;
+      top: -18px;
+      display: inline-block;
+      padding: 0 16px 0 0;
+      background-color: #ecedef;
+      font-size: 20px;
     }
+
+    .time-contents {
+      position: relative;
+      // overflow: hidden;
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+      // align-items: center;
+      gap: 8px;
+      height: 100%;
+      padding-left: 56px;
+    }
+
+    .time-item {
+      position: relative;
+      flex: 1 auto;
+      border-radius: 16px;
+      padding: 4px 8px;
+      height: 32px;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 4px;
+
+      &.middle {
+        background-color: rgb(135, 235, 218);
+      }
+
+      &.top {
+        background-color: orange;
+      }
+
+      &.top {
+        // 아래 방식은 걸치는게 아니라,향에 위, 중간, 아래에 붙이는방식
+        // align-self: flex-start;
+        // align-self: center;
+        // align-self: flex-end;
+
+        // position: absolute;
+        // top: -50%;
+        // transform: translateY(50%);
+        // width: 50%;
+
+        top: -16px;
+      }
+
+      &.middle {
+        top: 50%;
+        transform: translateY(-50%);
+      }
+    }
+  }
+}
+
+.checkbox {
+  display: inline-block;
+
+  input {
+    display: none;
+  }
+
+  .check {
+    display: block;
+    width: 24px;
+    height: 24px;
+    background-repeat: no-repeat;
+  }
+
+  input:checked + .check {
+    background-image: url("../../icon_check_on.svg");
+  }
+
+  input + .check {
+    background-image: url("../../icon_check_off.svg");
+  }
+}
+
+.modal {
+  position: absolute;
+  display: none;
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal_body {
+  position: absolute;
+  background-color: white;
+  width: 350px;
+  min-height: 40vh;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  overflow: hidden;
+}
+
+.modal_body h2 {
+  text-align: center;
+  padding: 16px 0;
+  font-size: 32px;
+}
+
+table {
+  margin: auto;
+}
+
+table th {
+  padding: 4px 16px 0;
+}
+
+.add-task-item {
+  cursor: pointer;
+  background-color: #3922d0be;
+  color: white;
+  font-size: 24px;
+  display: block;
+  margin: 32px auto;
+  width: 64px;
+  height: 32px;
+  border-radius: 10px;
 }

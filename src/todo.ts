@@ -20,6 +20,7 @@ const addTaskItemButton = document.querySelector(".add-task-item");
 const calenderContainer = document.querySelector(".calendar-container");
 const prevButton = document.querySelector(".prev");
 const nextButton = document.querySelector(".next");
+const homeButton = document.querySelector(".back_home");
 let todoList = JSON.parse(localStorage.getItem("todo") ?? JSON.stringify([])); // 로컬스토리지에 있는 todo를 가져와서 파싱
 for (let i = 0; i < 24; i++) {
   dayTimeList.push(`${String(i).padStart(2, "0")}:00`);
@@ -107,12 +108,20 @@ const renderTodo = () => {
           ? `${
               todo.startDay === todo.endDay ? "하루종일" : `${todo.startDay.split("-")[1]}월 ${todo.startDay.split("-")[2]}일 ~ ${todo.endDay.split("-")[1]}월 ${todo.endDay.split("-")[2]}일 하루종일`
             }`
-          : `(${todo.startDay.split("-")[1]}월 ${todo.startDay.split("-")[2]}일 ${todo.startTime} ~ ${todo.endDay.split("-")[1]}월 ${todo.endDay.split("-")[2]}일 ${todo.endTime})`
+          : `(${
+              todo.startDay === todo.endDay
+                ? `${`${todo.startTime} ~ ${todo.endTime}`}`
+                : `${`${todo.startDay.split("-")[1]}월 ${todo.startDay.split("-")[2]}일 ${todo.startTime} ~ ${todo.endDay.split("-")[1]}월 ${todo.endDay.split("-")[2]}일 ${todo.endTime}`}`
+            })`
       }</p>
         </div>`;
     }
   });
 };
+
+homeButton?.addEventListener("click", () => {
+  location.href = "/";
+});
 
 addTaskButton?.addEventListener("click", () => {
   if (

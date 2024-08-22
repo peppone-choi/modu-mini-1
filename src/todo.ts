@@ -3,6 +3,7 @@ import "./styles/todo.scss";
 import { Todo } from "./models/todo.model";
 
 import dayjs from "dayjs";
+import { render } from "sass";
 
 const timeline = document.querySelector("#timeline");
 const dayTimeList: Array<string> = [];
@@ -66,6 +67,14 @@ const renderTimeLine = () => {
 const renderTodo = () => {
   const renderTodoList = todoList.filter((todo: Todo) => {
     return todo.startDay <= selectedDate && todo.endDay >= selectedDate;
+  });
+  renderTodoList.sort((a: Todo, b: Todo) => {
+    const startTimeA = a.startTime?.replace(":", "");
+    const startTimeB = b.startTime?.replace(":", "");
+    if (startTimeA && startTimeB) {
+      return parseInt(startTimeA) - parseInt(startTimeB);
+    }
+    return 0;
   });
   renderTodoList.forEach((todo: Todo) => {
     let minite = 0;

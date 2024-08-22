@@ -19,4 +19,8 @@ export class Todo {
     this.isCompleted = false;
     this.allDay = create.allDay;
   } // 생성자
+
+  update(update: Partial<Todo>) {
+    Object.assign(this, update);
+  } // 할 일 업데이트 함수
 }

@@ -16,7 +16,7 @@ const taskEndDate = document.querySelector("#end-date");
 const taskStartTime = document.querySelector("#start-time");
 const taskEndTime = document.querySelector("#end-time");
 const allDayCheck = document.querySelector("#allday");
-const addTaskItemButton = document.querySelector(".add-task-item");
+const addTaskItemButton = document.querySelector(".add-task-item") as HTMLElement;
 const calenderContainer = document.querySelector(".calendar-container");
 const prevButton = document.querySelector(".prev");
 const nextButton = document.querySelector(".next");
@@ -114,6 +114,8 @@ const renderTodo = () => {
                 : `${`${todo.startDay.split("-")[1]}월 ${todo.startDay.split("-")[2]}일 ${todo.startTime} ~ ${todo.endDay.split("-")[1]}월 ${todo.endDay.split("-")[2]}일 ${todo.endTime}`}`
             })`
       }</p>
+      <button class="update" data-id="${todo.id}">수정</button>
+      <button class="delete" data-id="${todo.id}">삭제</button>
         </div>`;
     }
     const checkbox = document.querySelector(`#check-${todo.id}`);
@@ -254,6 +256,9 @@ renderTimeLine();
 renderCalendar();
 renderTodo();
 
+const updateButtonList = document.querySelectorAll(".update");
+const deleteButtonList = document.querySelectorAll(".delete");
+
 calenderContainer?.querySelectorAll("ul li").forEach((li) => {
   li.addEventListener("click", (e) => {
     if (li instanceof HTMLElement) {
@@ -288,3 +293,83 @@ const selectedButton = document.querySelector(".calendar-container ul li[data-da
 if (selectedButton instanceof HTMLElement) {
   selectedButton.classList.add("selected");
 }
+
+updateButtonList.forEach((button) => {
+  button.addEventListener("click", (e) => {
+    const editButton = document.createElement("button");
+    editButton.textContent = "수정";
+    editButton.classList.add("add-task-item");
+    modal?.querySelector(".modal_body")?.appendChild(editButton);
+    modal?.setAttribute("style", "display: block");
+    const id = button.dataset.id;
+    const editTodo = todoList.filter((todo: Todo) => todo.id === parseInt(id));
+    if (editTodo.length === 0) {
+      return;
+    }
+    const editTodoItem = editTodo[0];
+    if (
+      !(taskTitleInput instanceof HTMLInputElement) ||
+      !(taskStartDate instanceof HTMLInputElement) ||
+      !(taskStartTime instanceof HTMLInputElement) ||
+      !(taskEndTime instanceof HTMLInputElement) ||
+      !(taskEndDate instanceof HTMLInputElement) ||
+      !(allDayCheck instanceof HTMLInputElement)
+    ) {
+      return;
+    }
+    taskTitleInput.value = editTodoItem.content;
+    taskStartDate.value = editTodoItem.startDay;
+    taskEndDate.value = editTodoItem.endDay;
+    taskStartTime.value = editTodoItem.startTime ?? "";
+    taskEndTime.value = editTodoItem.endTime ?? "";
+    allDayCheck.checked = editTodoItem.allDay;
+    if (editTodoItem.allDay) {
+      taskStartTime.setAttribute("disabled", "true");
+      taskEndTime.setAttribute("disabled", "true");
+    }
+    editButton.addEventListener("click", () => {
+      if (
+        taskTitleInput.value == "" ||
+        taskStartDate.value == "" ||
+        (taskStartDate.value === taskEndDate.value && (taskEndTime.value === "" || taskStartTime.value === "") && !allDayCheck.checked) ||
+        (!allDayCheck.checked && taskStartTime.value == "" && taskEndTime.value == "")
+      ) {
+        alert("모든 항목을 입력해주세요");
+        return;
+      } // 빈 값 체크
+
+      if (taskStartDate.value > taskEndDate.value) {
+        alert("시작일이 종료일보다 늦습니다.");
+        return;
+      } // 시작일 종료일 비교
+      if (taskStartDate.value === taskEndDate.value && taskStartTime.value > taskEndTime.value) {
+        alert("시작시간이 종료시간보다 늦습니다.");
+        return;
+      }
+      const updateTodo = todoList.map((todo: Todo) => {
+        if (todo.id === parseInt(id)) {
+          todo.content = taskTitleInput.value;
+          todo.startDay = taskStartDate.value;
+          todo.endDay = taskEndDate.value;
+          todo.startTime = taskStartTime.value === "" ? null : taskStartTime.value;
+          todo.endTime = taskEndTime.value === "" ? null : taskEndTime.value;
+          todo.allDay = allDayCheck.checked;
+        }
+        return todo;
+      });
+      localStorage.setItem("todo", JSON.stringify(updateTodo));
+      todoList = JSON.parse(localStorage.getItem("todo") ?? JSON.stringify([]));
+      location.reload();
+    });
+  });
+});
+
+deleteButtonList.forEach((button) => {
+  button.addEventListener("click", (e) => {
+    const id = button.dataset.id;
+    const deleteTodo = todoList.filter((todo: Todo) => todo.id !== parseInt(id));
+    localStorage.setItem("todo", JSON.stringify(deleteTodo));
+    todoList = JSON.parse(localStorage.getItem("todo") ?? JSON.stringify([]));
+    location.reload();
+  });
+});

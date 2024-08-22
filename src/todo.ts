@@ -102,7 +102,11 @@ const renderTodo = () => {
             <input type="checkbox" name="isCompleted" id="check-${todo.id}" />
             <div class="check"></div>
           </label>
-          <p class="content">${todo.content} ${todo.allDay ? "(하루종일)" : `(${todo.startTime} ~ ${todo.endTime})`}</p>
+          <p class="content">${todo.content} ${
+        todo.allDay
+          ? "(하루종일)"
+          : `(${todo.startDay.split("-")[1]}월 ${todo.startDay.split("-")[2]}일 ${todo.startTime} ~ ${todo.endDay.split("-")[1]}월 ${todo.endDay.split("-")[2]}일 ${todo.endTime})`
+      }</p>
         </div>`;
     }
   });

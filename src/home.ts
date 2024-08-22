@@ -70,10 +70,11 @@ const todoList = JSON.parse(localStorage.getItem("todo") ?? JSON.stringify({}));
     // liElement.appendChild(titleText);
     element.movies.appendChild(liElement);
   });
-  todoList.filter((elementItem: Todo) => {
+  const todayTodo = todoList.filter((elementItem: Todo) => {
     return elementItem.startDay === dayjs(new Date()).format("YYYY-MM-DD");
   });
-  todoList.forEach((elementItem: Todo) => {
+
+  todayTodo.forEach((elementItem: Todo) => {
     const todoliElement = document.createElement("li");
     const inputElement = document.createElement("input");
     inputElement.type = "checkbox";

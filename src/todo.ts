@@ -1,7 +1,7 @@
 import "./main";
 import "./styles/todo.scss";
 import { Todo } from "./models/todo.model";
-import { render } from "sass";
+
 import dayjs from "dayjs";
 
 const timeline = document.querySelector("#timeline");
@@ -217,7 +217,7 @@ addTaskItemButton?.addEventListener("click", () => {
 
 renderTimeLine();
 renderCalendar();
-renderTodo();
+// renderTodo();
 
 // 오늘 날짜 now 클래스에 입력
 const nowButton = document.querySelector(".calendar-container ul li[data-date='" + today.format("YYYY-MM-DD") + "']");

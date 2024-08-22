@@ -5,4 +5,5 @@ export type CreateTodoType = {
   endDay: string;
   startTime: string | null;
   endTime: string | null;
+  allDay: boolean;
 };

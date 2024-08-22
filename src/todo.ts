@@ -26,7 +26,8 @@ for (let i = 0; i < 24; i++) {
 
 // 오늘 날짜
 const today = dayjs(new Date());
-let selectedDate = today.format("YYYY-MM-DD");
+const todayDate = today.format("YYYY-MM-DD");
+let selectedDate = localStorage.getItem("selectedDate") ?? todayDate;
 // 요일 배열
 const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
@@ -34,11 +35,11 @@ const renderCalendar = () => {
   const temp = document.createElement("ul");
   const renderDayList: Array<string> = [];
   days.forEach((day, i) => {
-    renderDayList.push(`<li data-date="${dayjs(selectedDate)
-      .add(i - dayjs(selectedDate).day(), "day")
+    renderDayList.push(`<li data-date="${dayjs(todayDate)
+      .add(i - dayjs(todayDate).day(), "day")
       .format("YYYY-MM-DD")}">
                         <button class="${day}">
-                            <p class="date">${dayjs(selectedDate).date() + (i - today.day())}</p>
+                            <p class="date">${dayjs(todayDate).date() + (i - today.day())}</p>
                             <p>${day}</p>
                         </button>
                     </li>`);
@@ -228,6 +229,16 @@ addTaskItemButton?.addEventListener("click", () => {
 renderTimeLine();
 renderCalendar();
 renderTodo();
+
+calenderContainer?.querySelectorAll("ul li").forEach((li) => {
+  li.addEventListener("click", (e) => {
+    if (li instanceof HTMLElement) {
+      selectedDate = li.dataset.date ?? todayDate;
+      localStorage.setItem("selectedDate", selectedDate);
+      location.reload();
+    }
+  });
+});
 
 // 오늘 날짜 now 클래스에 입력
 const nowButton = document.querySelector(".calendar-container ul li[data-date='" + today.format("YYYY-MM-DD") + "']");

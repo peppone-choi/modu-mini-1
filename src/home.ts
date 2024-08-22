@@ -8,12 +8,12 @@ import { getNowPlayingAndUpcomingMovies } from "./utils/movie.util";
 import { getNowPlayingAndUpcomingMoviesResponse } from "./@types/movie.type";
 import { KAKAO_APP_KEY, OPEN_WEATHER_APP_ID, TMDB_BEARER_TOKEN, weatherIconMap } from "./config/config";
 import element from "./elements/home.element.ts";
+import { Todo } from "./models/todo.model.ts";
+import dayjs from "dayjs";
 
-
-const todoList = JSON.parse(localStorage.getItem("todo")??JSON.stringify({}));
+const todoList = JSON.parse(localStorage.getItem("todo") ?? JSON.stringify({}));
 
 (async () => {
-
   console.log(todoList);
 
   const location: Location = await getLocation();
@@ -29,27 +29,27 @@ const todoList = JSON.parse(localStorage.getItem("todo")??JSON.stringify({}));
   element.pollution.textContent = weatherData.pollution;
 
   switch (weatherData.pollution) {
-    case "나쁨": 
-    case "최악": 
+    case "나쁨":
+    case "최악":
       element.pollution.style.color = "red";
       break;
-    case "좋음": 
-    case "괜찮음": 
-    case "보통": 
+    case "좋음":
+    case "괜찮음":
+    case "보통":
       element.pollution.style.color = "blue";
       break;
   }
 
   element.weatherIcon.src = `/img/weather/Light bg/${weatherIconMap.get(weatherData.weatherIcon)}`; // 날씨 아이콘 (맵으로 생성 후 가져옴)
   // movieData.results.slice(0, 3).forEach((movieItem) => {
-  
-  totalImages =  movieData.results.length;
+
+  totalImages = movieData.results.length;
   totalSlides = Math.ceil(totalImages / imagesPerSlide);
   // console.log(totalImages);
 
   movieData.results.forEach((movieItem) => {
     const liElement = document.createElement("li");
-    
+
     liElement.classList.add("movieItem");
     liElement.classList.add("slider");
 
@@ -58,10 +58,9 @@ const todoList = JSON.parse(localStorage.getItem("todo")??JSON.stringify({}));
     imgElement.src = "https://image.tmdb.org/t/p/w300" + movieItem.poster_path;
     imgElement.alt = movieItem.title;
 
-    if(movieItem.isNowPlaying) {
+    if (movieItem.isNowPlaying) {
       // liElement.classList.add("nowshow");
-    }
-    else {
+    } else {
       // liElement.classList.add("dday");
     }
 
@@ -71,12 +70,18 @@ const todoList = JSON.parse(localStorage.getItem("todo")??JSON.stringify({}));
     // liElement.appendChild(titleText);
     element.movies.appendChild(liElement);
   });
-
-  todoList.forEach((elementItem) => {
+  todoList.filter((elementItem: Todo) => {
+    return elementItem.startDay === dayjs(new Date()).format("YYYY-MM-DD");
+  });
+  todoList.forEach((elementItem: Todo) => {
     const todoliElement = document.createElement("li");
-
     const inputElement = document.createElement("input");
     inputElement.type = "checkbox";
+    inputElement.checked = elementItem.isCompleted;
+    inputElement.addEventListener("change", () => {
+      elementItem.isCompleted = !elementItem.isCompleted;
+      localStorage.setItem("todo", JSON.stringify(todoList));
+    });
     const spanElement = document.createElement("span");
 
     spanElement.textContent = elementItem.content;
@@ -84,9 +89,8 @@ const todoList = JSON.parse(localStorage.getItem("todo")??JSON.stringify({}));
     todoliElement.appendChild(inputElement);
     todoliElement.appendChild(spanElement);
 
-    element.todos.appendChild(todoliElement)
+    element.todos.appendChild(todoliElement);
   });
-
 })();
 
 // 요소를 가져오는 함수
@@ -100,9 +104,9 @@ const getElementById = <T extends HTMLElement>(id: string): T => {
 };
 
 // 요소 가져오기
-const sliderList = getElementById<HTMLUListElement>('movies');
-const prevBtn = getElementById<HTMLButtonElement>('prev-btn');
-const nextBtn = getElementById<HTMLButtonElement>('next-btn');
+const sliderList = getElementById<HTMLUListElement>("movies");
+const prevBtn = getElementById<HTMLButtonElement>("prev-btn");
+const nextBtn = getElementById<HTMLButtonElement>("next-btn");
 
 // 슬라이드 데이터
 let totalImages: number = 0; // 총 이미지 개수 (동적으로 설정 가능)
@@ -118,7 +122,7 @@ const updateSliderPosition = () => {
 };
 
 // 이전 버튼 클릭 이벤트
-prevBtn.addEventListener('click', () => {
+prevBtn.addEventListener("click", () => {
   if (currentSlideIndex > 0) {
     currentSlideIndex--;
   } else {
@@ -128,7 +132,7 @@ prevBtn.addEventListener('click', () => {
 });
 
 // 다음 버튼 클릭 이벤트
-nextBtn.addEventListener('click', () => {
+nextBtn.addEventListener("click", () => {
   if (currentSlideIndex < totalSlides - 1) {
     currentSlideIndex++;
   } else {
@@ -141,4 +145,4 @@ nextBtn.addEventListener('click', () => {
 updateSliderPosition();
 
 // 윈도우 크기 변경 시 슬라이드 위치 업데이트
-window.addEventListener('resize', updateSliderPosition);
+window.addEventListener("resize", updateSliderPosition);

@@ -100,7 +100,7 @@ const renderTodo = () => {
       divTime.innerHTML += `<div class="time-contents">
         <div class="time-item ${isZeroOrThirty ? `top` : `middle`}" data-item-time="${todo.startTime}">
           <label for="check-${todo.id}" class="checkbox">
-            <input type="checkbox" name="isCompleted" id="check-${todo.id}" />
+            <input type="checkbox" name="isCompleted" id="check-${todo.id}" ${todo.isCompleted ? "checked" : ""} />
             <div class="check"></div>
           </label>
           <p class="content">${todo.content} ${
@@ -115,6 +115,13 @@ const renderTodo = () => {
             })`
       }</p>
         </div>`;
+    }
+    const checkbox = document.querySelector(`#check-${todo.id}`);
+    if (checkbox instanceof HTMLInputElement) {
+      checkbox.addEventListener("change", () => {
+        todo.isCompleted = !todo.isCompleted;
+        localStorage.setItem("todo", JSON.stringify(todoList));
+      });
     }
   });
 };

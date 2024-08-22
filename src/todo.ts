@@ -18,6 +18,8 @@ const taskEndTime = document.querySelector("#end-time");
 const allDayCheck = document.querySelector("#allday");
 const addTaskItemButton = document.querySelector(".add-task-item");
 const calenderContainer = document.querySelector(".calendar-container");
+const prevButton = document.querySelector(".prev");
+const nextButton = document.querySelector(".next");
 let todoList = JSON.parse(localStorage.getItem("todo") ?? JSON.stringify([])); // 로컬스토리지에 있는 todo를 가져와서 파싱
 for (let i = 0; i < 24; i++) {
   dayTimeList.push(`${String(i).padStart(2, "0")}:00`);
@@ -35,11 +37,11 @@ const renderCalendar = () => {
   const temp = document.createElement("ul");
   const renderDayList: Array<string> = [];
   days.forEach((day, i) => {
-    renderDayList.push(`<li data-date="${dayjs(todayDate)
-      .add(i - dayjs(todayDate).day(), "day")
+    renderDayList.push(`<li data-date="${dayjs(selectedDate)
+      .add(i - dayjs(selectedDate).day(), "day")
       .format("YYYY-MM-DD")}">
                         <button class="${day}">
-                            <p class="date">${dayjs(todayDate).date() + (i - today.day())}</p>
+                            <p class="date">${dayjs(selectedDate).date() + (i - dayjs(selectedDate).day())}</p>
                             <p>${day}</p>
                         </button>
                     </li>`);
@@ -238,6 +240,19 @@ calenderContainer?.querySelectorAll("ul li").forEach((li) => {
       location.reload();
     }
   });
+});
+
+// 이전 주, 다음 주 버튼
+prevButton?.addEventListener("click", () => {
+  selectedDate = dayjs(selectedDate).subtract(7, "day").format("YYYY-MM-DD");
+  localStorage.setItem("selectedDate", selectedDate);
+  location.reload();
+});
+
+nextButton?.addEventListener("click", () => {
+  selectedDate = dayjs(selectedDate).add(7, "day").format("YYYY-MM-DD");
+  localStorage.setItem("selectedDate", selectedDate);
+  location.reload();
 });
 
 // 오늘 날짜 now 클래스에 입력

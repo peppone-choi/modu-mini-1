@@ -131,9 +131,9 @@ h2 {
     right: 0px;
 }
 
-.dday:after {
-    content: '상영예정';
+.dday {
     background-color: var(--main-bg-300);
+    color: red;
     position: absolute;
     font-size: 12px;
     right: 10px; top: 10px;

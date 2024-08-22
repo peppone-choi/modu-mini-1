@@ -62,15 +62,18 @@ let currentSlideIndex: number = 0;
     imgElement.src = "https://image.tmdb.org/t/p/w300" + movieItem.poster_path;
     imgElement.alt = movieItem.title;
 
+    const pElement = document.createElement("p");
+    
     if (movieItem.isNowPlaying) {
       liElement.classList.add("nowshow");
+      liElement.appendChild(imgElement);
     } else {
-      // liElement.classList.add("dday");
+      pElement.textContent = movieItem.releaseDateMinus ? "D" +(movieItem.releaseDateMinus).toString() : "";
+      pElement.classList.add("dday");
+      liElement.appendChild(imgElement);
+      liElement.appendChild(pElement);
     }
 
-    // const titleText = document.createTextNode(movieItem.title);
-    liElement.appendChild(imgElement);
-    // liElement.appendChild(titleText);
     element.movies.appendChild(liElement);
   });
   const todayTodo = todoList.filter((elementItem: Todo) => {

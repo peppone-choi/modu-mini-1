@@ -102,6 +102,24 @@ addTaskButton?.addEventListener("click", () => {
 
 modal?.addEventListener("click", (e) => {
   if (e.target === modal) {
+    if (
+      !(taskTitleInput instanceof HTMLInputElement) ||
+      !(taskStartDate instanceof HTMLInputElement) ||
+      !(taskStartTime instanceof HTMLInputElement) ||
+      !(taskEndTime instanceof HTMLInputElement) ||
+      !(taskEndDate instanceof HTMLInputElement) ||
+      !(allDayCheck instanceof HTMLInputElement)
+    ) {
+      return;
+    }
+    taskTitleInput.value = "";
+    taskStartDate.value = today.format("YYYY-MM-DD");
+    taskEndDate.value = today.format("YYYY-MM-DD");
+    taskStartTime.disabled = false;
+    taskEndTime.disabled = false;
+    taskStartTime.value = "";
+    taskEndTime.value = "";
+    allDayCheck.checked = false;
     modal?.setAttribute("style", "display: none");
   }
 });
@@ -166,8 +184,8 @@ addTaskItemButton?.addEventListener("click", () => {
     localStorage.setItem("todo", JSON.stringify(newTodoList)); // 합친 todo를 다시 저장
   }
   taskTitleInput.value = "";
-  taskStartDate.value = new Date().toISOString().slice(0, 10);
-  taskEndDate.value = new Date().toISOString().slice(0, 10);
+  taskStartDate.value = today.format("YYYY-MM-DD");
+  taskEndDate.value = today.format("YYYY-MM-DD");
   taskStartTime.disabled = false;
   taskEndTime.disabled = false;
   taskStartTime.value = "";

@@ -17,7 +17,7 @@ const taskEndTime = document.querySelector("#end-time");
 const allDayCheck = document.querySelector("#allday");
 const addTaskItemButton = document.querySelector(".add-task-item");
 const calenderContainer = document.querySelector(".calendar-container");
-const todoList = JSON.parse(localStorage.getItem("todo") ?? JSON.stringify([])); // 로컬스토리지에 있는 todo를 가져와서 파싱
+let todoList = JSON.parse(localStorage.getItem("todo") ?? JSON.stringify([])); // 로컬스토리지에 있는 todo를 가져와서 파싱
 for (let i = 0; i < 24; i++) {
   dayTimeList.push(`${String(i).padStart(2, "0")}:00`);
   dayTimeList.push(`${String(i).padStart(2, "0")}:30`);
@@ -54,7 +54,6 @@ const renderTimeLine = () => {
     temp.innerHTML = `
       <div class="timeline-row" data-time="${time}">
             <span class="time">${time}</span>
-            <div class="time-contents"></div>
         </div>
       `;
     timelineHtmlList.push(temp.innerHTML);
@@ -62,6 +61,39 @@ const renderTimeLine = () => {
   if (timeline) {
     timeline.appendChild(document.createRange().createContextualFragment(timelineHtmlList.join("")));
   }
+};
+
+const renderTodo = () => {
+  const renderTodoList = todoList.filter((todo: Todo) => {
+    return todo.startDay <= selectedDate && todo.endDay >= selectedDate;
+  });
+  renderTodoList.forEach((todo: Todo) => {
+    let minite = 0;
+    let isZeroOrThirty = false;
+    let time = todo.startTime ?? "00:00";
+    if (todo.startTime) {
+      minite = parseInt(todo.startTime.split(":")[1]);
+    }
+    if (minite === 0 || minite === 30) {
+      isZeroOrThirty = true;
+    }
+    if (!isZeroOrThirty && minite < 30) {
+      time = `${todo.startTime?.split(":")[0]}:00`;
+    } else if (!isZeroOrThirty && minite > 30) {
+      time = `${todo.startTime?.split(":")[0]}:30`;
+    }
+    const divTime = document.querySelector(`.timeline-row[data-time='${time}']`);
+    if (divTime instanceof HTMLElement) {
+      divTime.innerHTML += `<div class="time-contents">
+        <div class="time-item ${isZeroOrThirty ? `top` : `middle`}" data-item-time="${todo.startTime}">
+          <label for="check-${todo.id}" class="checkbox">
+            <input type="checkbox" name="isCompleted" id="check-${todo.id}" />
+            <div class="check"></div>
+          </label>
+          <p class="content">${todo.content}</p>
+        </div>`;
+    }
+  });
 };
 
 addTaskButton?.addEventListener("click", () => {
@@ -143,10 +175,13 @@ addTaskItemButton?.addEventListener("click", () => {
   allDayCheck.checked = false;
 
   modal?.setAttribute("style", "display: none");
+  todoList = JSON.parse(localStorage.getItem("todo") ?? JSON.stringify([]));
+  renderTodo();
 });
 
 renderTimeLine();
 renderCalendar();
+renderTodo();
 
 // 오늘 날짜 now 클래스에 입력
 const nowButton = document.querySelector(".calendar-container ul li[data-date='" + today.format("YYYY-MM-DD") + "']");

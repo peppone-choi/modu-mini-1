@@ -104,7 +104,9 @@ const renderTodo = () => {
           </label>
           <p class="content">${todo.content} ${
         todo.allDay
-          ? "(하루종일)"
+          ? `${
+              todo.startDay === todo.endDay ? "하루종일" : `${todo.startDay.split("-")[1]}월 ${todo.startDay.split("-")[2]}일 ~ ${todo.endDay.split("-")[1]}월 ${todo.endDay.split("-")[2]}일 하루종일`
+            }`
           : `(${todo.startDay.split("-")[1]}월 ${todo.startDay.split("-")[2]}일 ${todo.startTime} ~ ${todo.endDay.split("-")[1]}월 ${todo.endDay.split("-")[2]}일 ${todo.endTime})`
       }</p>
         </div>`;

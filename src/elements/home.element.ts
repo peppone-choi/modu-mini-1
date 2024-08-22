@@ -5,6 +5,8 @@ const $ = {
   weather: document.querySelector("#weather") as HTMLLIElement,
   pollution: document.querySelector("#pollution") as HTMLLIElement,
   movies: document.querySelector("#movies") as HTMLUListElement,
+  prevBtn: document.querySelector("#prev-btn") as HTMLLIElement,
+  nextBtn: document.querySelector("#next-btn") as HTMLLIElement,
   todos: document.querySelector("#todos") as HTMLUListElement,
 };
 

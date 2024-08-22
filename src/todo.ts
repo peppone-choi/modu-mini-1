@@ -114,8 +114,12 @@ const renderTodo = () => {
                 : `${`${todo.startDay.split("-")[1]}월 ${todo.startDay.split("-")[2]}일 ${todo.startTime} ~ ${todo.endDay.split("-")[1]}월 ${todo.endDay.split("-")[2]}일 ${todo.endTime}`}`
             })`
       }</p>
-      <button class="update" data-id="${todo.id}">수정</button>
-      <button class="delete" data-id="${todo.id}">삭제</button>
+      <button class="update" data-id="${todo.id}">
+        <img class="pencil" src="../icon_pencil.svg" alt="수정">
+      </button>
+      <button class="delete" data-id="${todo.id}">
+        <img class="trash_can" src="../icon_trash_can.svg" alt="삭제">
+      </button>
         </div>`;
     }
     const checkbox = document.querySelector(`#check-${todo.id}`);

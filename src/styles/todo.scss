@@ -250,3 +250,24 @@ table th {
   height: 32px;
   border-radius: 10px;
 }
+
+//수정
+.update img{
+  width: 20px;
+  height: 20px;
+  margin: 0 8px;
+}
+
+.pencil:hover{
+  content: url("../../icon_pencil_hover.svg");
+}
+
+.trash_can:hover {
+  content: url("../../icon_trash_can_hover.svg");
+}
+
+//삭제
+.delete img{
+  width: 20px;
+  height: 20px;
+}

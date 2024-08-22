@@ -97,6 +97,24 @@ const renderTodo = () => {
 };
 
 addTaskButton?.addEventListener("click", () => {
+  if (
+    !(taskTitleInput instanceof HTMLInputElement) ||
+    !(taskStartDate instanceof HTMLInputElement) ||
+    !(taskStartTime instanceof HTMLInputElement) ||
+    !(taskEndTime instanceof HTMLInputElement) ||
+    !(taskEndDate instanceof HTMLInputElement) ||
+    !(allDayCheck instanceof HTMLInputElement)
+  ) {
+    return;
+  }
+  taskTitleInput.value = "";
+  taskStartDate.value = today.format("YYYY-MM-DD");
+  taskEndDate.value = today.format("YYYY-MM-DD");
+  taskStartTime.disabled = false;
+  taskEndTime.disabled = false;
+  taskStartTime.value = "";
+  taskEndTime.value = "";
+  allDayCheck.checked = false;
   modal?.setAttribute("style", "display: block");
 });
 
@@ -194,7 +212,7 @@ addTaskItemButton?.addEventListener("click", () => {
 
   modal?.setAttribute("style", "display: none");
   todoList = JSON.parse(localStorage.getItem("todo") ?? JSON.stringify([]));
-  renderTodo();
+  location.reload();
 });
 
 renderTimeLine();

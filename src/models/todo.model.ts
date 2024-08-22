@@ -8,6 +8,7 @@ export class Todo {
   startTime: string | null; // 할 일 시작 시간
   endTime: string | null; // 할 일 종료 시간
   isCompleted: boolean; // 완료 여부
+  allDay: boolean; // 종일 여부
   constructor(create: CreateTodoType) {
     this.id = create.id;
     this.content = create.content;
@@ -16,6 +17,7 @@ export class Todo {
     this.startTime = create.startTime;
     this.endTime = create.endTime;
     this.isCompleted = false;
+    this.allDay = create.allDay;
   } // 생성자
   toggleCompleted() {
     this.isCompleted = !this.isCompleted;

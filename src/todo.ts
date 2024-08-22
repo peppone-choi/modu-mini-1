@@ -1,8 +1,9 @@
 import "./main";
 import "./styles/todo.scss";
 import { Todo } from "./models/todo.model";
-import { render } from "sass";
+
 import dayjs from "dayjs";
+import { render } from "sass";
 
 const timeline = document.querySelector("#timeline");
 const dayTimeList: Array<string> = [];
@@ -17,7 +18,10 @@ const taskEndTime = document.querySelector("#end-time");
 const allDayCheck = document.querySelector("#allday");
 const addTaskItemButton = document.querySelector(".add-task-item");
 const calenderContainer = document.querySelector(".calendar-container");
-const todoList = JSON.parse(localStorage.getItem("todo") ?? JSON.stringify([])); // 로컬스토리지에 있는 todo를 가져와서 파싱
+const prevButton = document.querySelector(".prev");
+const nextButton = document.querySelector(".next");
+const homeButton = document.querySelector(".back_home");
+let todoList = JSON.parse(localStorage.getItem("todo") ?? JSON.stringify([])); // 로컬스토리지에 있는 todo를 가져와서 파싱
 for (let i = 0; i < 24; i++) {
   dayTimeList.push(`${String(i).padStart(2, "0")}:00`);
   dayTimeList.push(`${String(i).padStart(2, "0")}:30`);
@@ -25,7 +29,8 @@ for (let i = 0; i < 24; i++) {
 
 // 오늘 날짜
 const today = dayjs(new Date());
-let selectedDate = today.format("YYYY-MM-DD");
+const todayDate = today.format("YYYY-MM-DD");
+let selectedDate = localStorage.getItem("selectedDate") ?? todayDate;
 // 요일 배열
 const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
@@ -37,7 +42,7 @@ const renderCalendar = () => {
       .add(i - dayjs(selectedDate).day(), "day")
       .format("YYYY-MM-DD")}">
                         <button class="${day}">
-                            <p class="date">${dayjs(selectedDate).date() + (i - today.day())}</p>
+                            <p class="date">${dayjs(selectedDate).date() + (i - dayjs(selectedDate).day())}</p>
                             <p>${day}</p>
                         </button>
                     </li>`);
@@ -54,7 +59,6 @@ const renderTimeLine = () => {
     temp.innerHTML = `
       <div class="timeline-row" data-time="${time}">
             <span class="time">${time}</span>
-            <div class="time-contents"></div>
         </div>
       `;
     timelineHtmlList.push(temp.innerHTML);
@@ -64,12 +68,103 @@ const renderTimeLine = () => {
   }
 };
 
+const renderTodo = () => {
+  const renderTodoList = todoList.filter((todo: Todo) => {
+    return todo.startDay <= selectedDate && todo.endDay >= selectedDate;
+  });
+  renderTodoList.sort((a: Todo, b: Todo) => {
+    const startTimeA = a.startTime?.replace(":", "");
+    const startTimeB = b.startTime?.replace(":", "");
+    if (startTimeA && startTimeB) {
+      return parseInt(startTimeA) - parseInt(startTimeB);
+    }
+    return 0;
+  });
+  renderTodoList.forEach((todo: Todo) => {
+    let minite = 0;
+    let isZeroOrThirty = false;
+    let time = todo.startTime ?? "00:00";
+    if (todo.startTime) {
+      minite = parseInt(todo.startTime.split(":")[1]);
+    }
+    if (minite === 0 || minite === 30) {
+      isZeroOrThirty = true;
+    }
+    if (!isZeroOrThirty && minite < 30) {
+      time = `${todo.startTime?.split(":")[0]}:00`;
+    } else if (!isZeroOrThirty && minite > 30) {
+      time = `${todo.startTime?.split(":")[0]}:30`;
+    }
+    const divTime = document.querySelector(`.timeline-row[data-time='${time}']`);
+    if (divTime instanceof HTMLElement) {
+      divTime.innerHTML += `<div class="time-contents">
+        <div class="time-item ${isZeroOrThirty ? `top` : `middle`}" data-item-time="${todo.startTime}">
+          <label for="check-${todo.id}" class="checkbox">
+            <input type="checkbox" name="isCompleted" id="check-${todo.id}" />
+            <div class="check"></div>
+          </label>
+          <p class="content">${todo.content} ${
+        todo.allDay
+          ? `${
+              todo.startDay === todo.endDay ? "하루종일" : `${todo.startDay.split("-")[1]}월 ${todo.startDay.split("-")[2]}일 ~ ${todo.endDay.split("-")[1]}월 ${todo.endDay.split("-")[2]}일 하루종일`
+            }`
+          : `(${
+              todo.startDay === todo.endDay
+                ? `${`${todo.startTime} ~ ${todo.endTime}`}`
+                : `${`${todo.startDay.split("-")[1]}월 ${todo.startDay.split("-")[2]}일 ${todo.startTime} ~ ${todo.endDay.split("-")[1]}월 ${todo.endDay.split("-")[2]}일 ${todo.endTime}`}`
+            })`
+      }</p>
+        </div>`;
+    }
+  });
+};
+
+homeButton?.addEventListener("click", () => {
+  location.href = "/";
+});
+
 addTaskButton?.addEventListener("click", () => {
+  if (
+    !(taskTitleInput instanceof HTMLInputElement) ||
+    !(taskStartDate instanceof HTMLInputElement) ||
+    !(taskStartTime instanceof HTMLInputElement) ||
+    !(taskEndTime instanceof HTMLInputElement) ||
+    !(taskEndDate instanceof HTMLInputElement) ||
+    !(allDayCheck instanceof HTMLInputElement)
+  ) {
+    return;
+  }
+  taskTitleInput.value = "";
+  taskStartDate.value = today.format("YYYY-MM-DD");
+  taskEndDate.value = today.format("YYYY-MM-DD");
+  taskStartTime.disabled = false;
+  taskEndTime.disabled = false;
+  taskStartTime.value = "";
+  taskEndTime.value = "";
+  allDayCheck.checked = false;
   modal?.setAttribute("style", "display: block");
 });
 
 modal?.addEventListener("click", (e) => {
   if (e.target === modal) {
+    if (
+      !(taskTitleInput instanceof HTMLInputElement) ||
+      !(taskStartDate instanceof HTMLInputElement) ||
+      !(taskStartTime instanceof HTMLInputElement) ||
+      !(taskEndTime instanceof HTMLInputElement) ||
+      !(taskEndDate instanceof HTMLInputElement) ||
+      !(allDayCheck instanceof HTMLInputElement)
+    ) {
+      return;
+    }
+    taskTitleInput.value = "";
+    taskStartDate.value = today.format("YYYY-MM-DD");
+    taskEndDate.value = today.format("YYYY-MM-DD");
+    taskStartTime.disabled = false;
+    taskEndTime.disabled = false;
+    taskStartTime.value = "";
+    taskEndTime.value = "";
+    allDayCheck.checked = false;
     modal?.setAttribute("style", "display: none");
   }
 });
@@ -124,6 +219,7 @@ addTaskItemButton?.addEventListener("click", () => {
     endDay: taskEndDate.value,
     startTime: taskStartTime.value === "" ? null : taskStartTime.value,
     endTime: taskEndTime.value === "" ? null : taskEndTime.value,
+    allDay: allDayCheck.checked,
   });
   if (todoList.length === 0) {
     // 로컬스토리지에 todo가 없을 때
@@ -134,8 +230,8 @@ addTaskItemButton?.addEventListener("click", () => {
     localStorage.setItem("todo", JSON.stringify(newTodoList)); // 합친 todo를 다시 저장
   }
   taskTitleInput.value = "";
-  taskStartDate.value = new Date().toISOString().slice(0, 10);
-  taskEndDate.value = new Date().toISOString().slice(0, 10);
+  taskStartDate.value = today.format("YYYY-MM-DD");
+  taskEndDate.value = today.format("YYYY-MM-DD");
   taskStartTime.disabled = false;
   taskEndTime.disabled = false;
   taskStartTime.value = "";
@@ -143,13 +239,45 @@ addTaskItemButton?.addEventListener("click", () => {
   allDayCheck.checked = false;
 
   modal?.setAttribute("style", "display: none");
+  todoList = JSON.parse(localStorage.getItem("todo") ?? JSON.stringify([]));
+  location.reload();
 });
 
 renderTimeLine();
 renderCalendar();
+renderTodo();
+
+calenderContainer?.querySelectorAll("ul li").forEach((li) => {
+  li.addEventListener("click", (e) => {
+    if (li instanceof HTMLElement) {
+      selectedDate = li.dataset.date ?? todayDate;
+      localStorage.setItem("selectedDate", selectedDate);
+      location.reload();
+    }
+  });
+});
+
+// 이전 주, 다음 주 버튼
+prevButton?.addEventListener("click", () => {
+  selectedDate = dayjs(selectedDate).subtract(7, "day").format("YYYY-MM-DD");
+  localStorage.setItem("selectedDate", selectedDate);
+  location.reload();
+});
+
+nextButton?.addEventListener("click", () => {
+  selectedDate = dayjs(selectedDate).add(7, "day").format("YYYY-MM-DD");
+  localStorage.setItem("selectedDate", selectedDate);
+  location.reload();
+});
 
 // 오늘 날짜 now 클래스에 입력
 const nowButton = document.querySelector(".calendar-container ul li[data-date='" + today.format("YYYY-MM-DD") + "']");
 if (nowButton instanceof HTMLElement) {
   nowButton.classList.add("now");
+}
+
+// 선택된 날짜 selected 클래스에 입력
+const selectedButton = document.querySelector(".calendar-container ul li[data-date='" + selectedDate + "']");
+if (selectedButton instanceof HTMLElement) {
+  selectedButton.classList.add("selected");
 }

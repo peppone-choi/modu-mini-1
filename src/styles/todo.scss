@@ -64,7 +64,7 @@ ul {
 ul li {
   width: 40dvw;
   height: 160px;
-  background-color: white;
+  background-color: white; 
   border-radius: 30px;
   gap: 8px;
   position: relative;
@@ -93,6 +93,10 @@ ul li button {
   border-radius: 30px;
 }
 
+.selected {
+  box-shadow: 0 0 0 2px #3922d0be;
+}
+
 ul li p {
   font-size: 24px;
 }
@@ -111,6 +115,7 @@ section h2 {
     position: relative;
     border-top: 1px solid #ddd;
     height: 150px;
+    display: flex;
 
     .time {
       position: absolute;
@@ -141,7 +146,7 @@ section h2 {
       padding: 4px 8px;
       height: 32px;
       display: flex;
-      flex-direction: row;
+      /* flex-direction: row; */
       align-items: center;
       gap: 4px;
 

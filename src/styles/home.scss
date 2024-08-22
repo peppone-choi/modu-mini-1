@@ -87,18 +87,11 @@ h2 {
 }
 
 .movie-container ul li {
-    width: 500px;
-    flex-basis: calc(33%);
-    // display: block;
+    width: 250px;
+    height: 400px;
+    // flex-basis: calc(33%);
+
     overflow: hidden;
-    // text-overflow: ellipsis;
-    // white-space: nowrap;
-    // display: block;
-
-    font-size: 20px;
-    font-weight: bold;
-    text-align: center;
-
     position: relative;
 }
 
@@ -128,4 +121,52 @@ h2 {
     right: 5px; top: 5px;
     border-radius: 5px;
     padding: 5px 10px;
+}
+
+.slider-container {
+    position: relative;
+    width: 100%;
+    max-width: 900px;
+    margin: 50px auto;
+    overflow: hidden;
+}
+
+.slider {
+    width: 100%;
+    overflow: hidden;
+}  
+.slider-list {
+    display: flex;
+    transition: transform 0.3s ease-in-out;
+    padding: 0;
+    list-style: none;
+}
+
+.slider-list li {
+    width: calc(100% / 3);
+    flex: 0 0 calc(100% / 3);
+    text-align: center;
+}
+
+.slider-list img {
+    width: 100%;
+    height: auto;
+}
+
+.slider-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+}  
+#prev-btn {
+    left: 0;
+}
+
+#next-btn {
+    right: 0;
 }

@@ -9,7 +9,13 @@ import { getNowPlayingAndUpcomingMoviesResponse } from "./@types/movie.type";
 import { KAKAO_APP_KEY, OPEN_WEATHER_APP_ID, TMDB_BEARER_TOKEN, weatherIconMap } from "./config/config";
 import element from "./elements/home.element.ts";
 
+
+const todoList = JSON.parse(localStorage.getItem("todo")??JSON.stringify({}));
+
 (async () => {
+
+  console.log(todoList);
+
   const location: Location = await getLocation();
   console.log(location);
   const weatherData: Weather = await getWeather(location, OPEN_WEATHER_APP_ID, KAKAO_APP_KEY);
@@ -65,6 +71,22 @@ import element from "./elements/home.element.ts";
     // liElement.appendChild(titleText);
     element.movies.appendChild(liElement);
   });
+
+  todoList.forEach((elementItem) => {
+    const todoliElement = document.createElement("li");
+
+    const inputElement = document.createElement("input");
+    inputElement.type = "checkbox";
+    const spanElement = document.createElement("span");
+
+    spanElement.textContent = elementItem.content;
+
+    todoliElement.appendChild(inputElement);
+    todoliElement.appendChild(spanElement);
+
+    element.todos.appendChild(todoliElement)
+  });
+
 })();
 
 // 요소를 가져오는 함수

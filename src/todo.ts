@@ -160,7 +160,7 @@ addTaskButton?.addEventListener("click", () => {
     !(allDayCheck instanceof HTMLInputElement)
   ) {
     return;
-  }
+  } // 타입 가드
   taskTitleInput.value = "";
   taskStartDate.value = today.format("YYYY-MM-DD");
   taskEndDate.value = today.format("YYYY-MM-DD");
@@ -183,7 +183,7 @@ modal?.addEventListener("click", (e) => {
       !(allDayCheck instanceof HTMLInputElement)
     ) {
       return;
-    }
+    } // 타입 가드
     taskTitleInput.value = "";
     taskStartDate.value = today.format("YYYY-MM-DD");
     taskEndDate.value = today.format("YYYY-MM-DD");
@@ -348,6 +348,9 @@ updateButtonList.forEach((button) => {
     }
     modal?.querySelector(".modal_body")?.appendChild(editButton);
     modal?.setAttribute("style", "display: block");
+    if (!(button instanceof HTMLElement)) {
+      return;
+    }
     const id = button.dataset.id;
     const editTodo = todoList.filter((todo: Todo) => todo.id === parseInt(id));
     if (editTodo.length === 0) {
@@ -363,7 +366,7 @@ updateButtonList.forEach((button) => {
       !(allDayCheck instanceof HTMLInputElement)
     ) {
       return;
-    }
+    } // 타입 가드
     taskTitleInput.value = editTodoItem.content;
     taskStartDate.value = editTodoItem.startDay;
     taskEndDate.value = editTodoItem.endDay;
@@ -412,7 +415,10 @@ updateButtonList.forEach((button) => {
 });
 
 deleteButtonList.forEach((button) => {
-  button.addEventListener("click", (e) => {
+  button.addEventListener("click", () => {
+    if (!(button instanceof HTMLElement)) {
+      return;
+    } // 타입 가드
     const id = button.dataset.id;
     const deleteTodo = todoList.filter((todo: Todo) => todo.id !== parseInt(id));
     localStorage.setItem("todo", JSON.stringify(deleteTodo));

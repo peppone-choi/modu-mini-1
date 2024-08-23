@@ -23,6 +23,8 @@ const nextButton = document.querySelector(".next");
 const lastWeek = document.querySelector(".last_week");
 const nextWeek = document.querySelector(".next_week");
 const homeButton = document.querySelector(".back_home");
+const laswWeekdiv = document.querySelector(".last_week");
+const nextWeekdiv = document.querySelector(".next_week");
 let todoList = JSON.parse(localStorage.getItem("todo") ?? JSON.stringify([])); // 로컬스토리지에 있는 todo를 가져와서 파싱
 
 for (let i = 0; i < 24; i++) {
@@ -36,6 +38,13 @@ const todayDate = today.format("YYYY-MM-DD");
 let selectedDate = localStorage.getItem("selectedDate") ?? todayDate;
 // 요일 배열
 const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+
+const renderLastAndNextWeek = () => {
+  if (laswWeekdiv instanceof HTMLElement && nextWeekdiv instanceof HTMLElement) {
+    laswWeekdiv.textContent = dayjs(selectedDate).subtract(7, "day").format("M월");
+    nextWeekdiv.textContent = dayjs(selectedDate).add(7, "day").format("M월");
+  }
+};
 
 const renderCalendar = () => {
   const temp = document.createElement("ul");
@@ -268,6 +277,7 @@ addTaskItemButton?.addEventListener("click", () => {
 renderTimeLine();
 renderCalendar();
 renderTodo();
+renderLastAndNextWeek();
 
 const updateButtonList = document.querySelectorAll(".update");
 const deleteButtonList = document.querySelectorAll(".delete");

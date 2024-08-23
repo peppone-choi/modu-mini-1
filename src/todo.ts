@@ -42,7 +42,9 @@ const renderCalendar = () => {
       .add(i - dayjs(selectedDate).day(), "day")
       .format("YYYY-MM-DD")}">
                         <button class="${day}">
-                            <p class="date">${dayjs(selectedDate).date() + (i - dayjs(selectedDate).day())}</p>
+                            <p class="date">${dayjs(selectedDate)
+                              .add(i - dayjs(selectedDate).day(), "day")
+                              .format("D")}</p>
                             <p>${day}</p>
                         </button>
                     </li>`);

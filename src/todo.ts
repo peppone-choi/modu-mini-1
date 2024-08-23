@@ -20,8 +20,11 @@ const addTaskItemButton = document.querySelector(".add-task-item") as HTMLElemen
 const calenderContainer = document.querySelector(".calendar-container");
 const prevButton = document.querySelector(".prev");
 const nextButton = document.querySelector(".next");
+const lastWeek = document.querySelector(".last_week");
+const nextWeek = document.querySelector(".next_week");
 const homeButton = document.querySelector(".back_home");
 let todoList = JSON.parse(localStorage.getItem("todo") ?? JSON.stringify([])); // 로컬스토리지에 있는 todo를 가져와서 파싱
+
 for (let i = 0; i < 24; i++) {
   dayTimeList.push(`${String(i).padStart(2, "0")}:00`);
   dayTimeList.push(`${String(i).padStart(2, "0")}:30`);
@@ -285,6 +288,26 @@ nextButton?.addEventListener("click", () => {
   localStorage.setItem("selectedDate", selectedDate);
   location.reload();
 });
+
+if (prevButton instanceof HTMLElement && lastWeek instanceof HTMLElement) {
+  prevButton.addEventListener("mouseover", () => {
+    lastWeek.style.display = "block";
+  });
+
+  prevButton.addEventListener("mouseout", () => {
+    lastWeek.style.display = "none";
+  });
+}
+
+if (nextButton instanceof HTMLElement && nextWeek instanceof HTMLElement) {
+  nextButton.addEventListener("mouseover", () => {
+    nextWeek.style.display = "block";
+  });
+
+  nextButton.addEventListener("mouseout", () => {
+    nextWeek.style.display = "none";
+  });
+}
 
 // 오늘 날짜 now 클래스에 입력
 const nowButton = document.querySelector(".calendar-container ul li[data-date='" + today.format("YYYY-MM-DD") + "']");

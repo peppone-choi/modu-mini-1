@@ -54,7 +54,7 @@ section {
 }
 
 .last_week, .next_week {
-  //display: none;
+  display: none;
   position: absolute;
   margin-top: 26px;
   background-color: #383838;
@@ -72,6 +72,14 @@ section {
 .next_week {
   right: 48px;
 }
+/*
+.prev:hover .last_week {
+  display: block;
+}
+
+.next:hover .next_week {
+  display: block;
+}*/
 
 //.last_week:hover, .next_week:hover{
  // background-color: #383838;

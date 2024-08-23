@@ -27,7 +27,7 @@ let currentSlideIndex: number = 0;
   const movieData: getNowPlayingAndUpcomingMoviesResponse = await getNowPlayingAndUpcomingMovies(1, TMDB_BEARER_TOKEN);
   console.log(movieData);
 
-// 날씨 리스트 가져오기
+  // 날씨 리스트 가져오기
   element.region.textContent = weatherData.region;
   element.temp.textContent = Math.ceil(weatherData.temp * 10) / 10 + "°";
   element.weather.textContent = weatherData.weather;
@@ -50,7 +50,7 @@ let currentSlideIndex: number = 0;
   totalImages = movieData.results.length;
   totalSlides = Math.ceil(totalImages / imagesPerSlide);
 
-// 영화 리스트 가져오기
+  // 영화 리스트 가져오기
   movieData.results.forEach((movieItem) => {
     const liElement = document.createElement("li");
 
@@ -63,12 +63,12 @@ let currentSlideIndex: number = 0;
     imgElement.alt = movieItem.title;
 
     const pElement = document.createElement("p");
-    
+
     if (movieItem.isNowPlaying) {
       liElement.classList.add("nowshow");
       liElement.appendChild(imgElement);
     } else {
-      pElement.textContent = movieItem.releaseDateMinus ? "D" +(movieItem.releaseDateMinus).toString() : "";
+      pElement.textContent = movieItem.releaseDateMinus ? "D" + movieItem.releaseDateMinus.toString() : "";
       pElement.classList.add("dday");
       liElement.appendChild(imgElement);
       liElement.appendChild(pElement);
@@ -77,9 +77,13 @@ let currentSlideIndex: number = 0;
     element.movies.appendChild(liElement);
   });
   const todayTodo = todoList.filter((elementItem: Todo) => {
-    return elementItem.startDay === dayjs(new Date()).format("YYYY-MM-DD");
+    return (
+      elementItem.startDay === dayjs(new Date()).format("YYYY-MM-DD") ||
+      elementItem.endDay === dayjs(new Date()).format("YYYY-MM-DD") ||
+      (dayjs(new Date()).isAfter(dayjs(elementItem.startDay)) && dayjs(new Date()).isBefore(dayjs(elementItem.endDay)))
+    );
   });
-// todo List 가져오기 
+  // todo List 가져오기
   todayTodo.forEach((elementItem: Todo) => {
     const todoliElement = document.createElement("li");
     const inputElement = document.createElement("input");

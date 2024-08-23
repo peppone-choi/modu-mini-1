@@ -199,6 +199,10 @@ allDayCheck?.addEventListener("change", (e) => {
 });
 
 addTaskItemButton?.addEventListener("click", () => {
+  if (document.querySelector(".edit-task")) {
+    document.querySelector(".edit-task")?.remove();
+  }
+
   if (
     !(taskTitleInput instanceof HTMLInputElement) ||
     !(taskStartDate instanceof HTMLInputElement) ||
@@ -301,10 +305,14 @@ if (selectedButton instanceof HTMLElement) {
 }
 
 updateButtonList.forEach((button) => {
-  button.addEventListener("click", (e) => {
+  button.addEventListener("click", () => {
     const editButton = document.createElement("button");
+    editButton.classList.add("edit-task");
     editButton.textContent = "수정";
     editButton.classList.add("add-task-item");
+    if (document.querySelector(".edit-task")) {
+      document.querySelector(".edit-task")?.remove();
+    }
     modal?.querySelector(".modal_body")?.appendChild(editButton);
     modal?.setAttribute("style", "display: block");
     const id = button.dataset.id;

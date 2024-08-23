@@ -15,7 +15,7 @@ const todoList = JSON.parse(localStorage.getItem("todo") ?? JSON.stringify({}));
 
 // 슬라이드 데이터
 let totalImages: number = 0; // 총 이미지 개수 (동적으로 설정 가능)
-let imagesPerSlide: number = 3;
+let imagesPerSlide: number = 5;
 let totalSlides: number = 0;
 let currentSlideIndex: number = 0;
 
@@ -51,7 +51,7 @@ let currentSlideIndex: number = 0;
   totalSlides = Math.ceil(totalImages / imagesPerSlide);
 
   // 영화 리스트 가져오기
-  movieData.results.forEach((movieItem) => {
+  movieData.results.reverse().forEach((movieItem) => {
     const liElement = document.createElement("li");
 
     liElement.classList.add("movieItem");

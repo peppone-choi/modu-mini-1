@@ -3,7 +3,6 @@ import "./styles/todo.scss";
 import { Todo } from "./models/todo.model";
 
 import dayjs from "dayjs";
-import { render } from "sass";
 
 const timeline = document.querySelector("#timeline");
 const dayTimeList: Array<string> = [];
@@ -283,7 +282,7 @@ const updateButtonList = document.querySelectorAll(".update");
 const deleteButtonList = document.querySelectorAll(".delete");
 
 calenderContainer?.querySelectorAll("ul li").forEach((li) => {
-  li.addEventListener("click", (e) => {
+  li.addEventListener("click", () => {
     if (li instanceof HTMLElement) {
       selectedDate = li.dataset.date ?? todayDate;
       localStorage.setItem("selectedDate", selectedDate);
@@ -352,7 +351,12 @@ updateButtonList.forEach((button) => {
       return;
     }
     const id = button.dataset.id;
-    const editTodo = todoList.filter((todo: Todo) => todo.id === parseInt(id));
+    const editTodo = todoList.filter((todo: Todo) => {
+      if (id === undefined || id === null) {
+        return;
+      } // 타입 가드
+      todo.id === parseInt(id);
+    });
     if (editTodo.length === 0) {
       return;
     }
@@ -397,6 +401,9 @@ updateButtonList.forEach((button) => {
         return;
       }
       const updateTodo = todoList.map((todo: Todo) => {
+        if (id === undefined || id === null) {
+          return;
+        } // 타입 가드
         if (todo.id === parseInt(id)) {
           todo.content = taskTitleInput.value;
           todo.startDay = taskStartDate.value;
@@ -420,6 +427,9 @@ deleteButtonList.forEach((button) => {
       return;
     } // 타입 가드
     const id = button.dataset.id;
+    if (id === undefined || id === null) {
+      return;
+    } // 타입 가드
     const deleteTodo = todoList.filter((todo: Todo) => todo.id !== parseInt(id));
     localStorage.setItem("todo", JSON.stringify(deleteTodo));
     todoList = JSON.parse(localStorage.getItem("todo") ?? JSON.stringify([]));

@@ -1,1 +1,183 @@
 @import "_reset";
+
+:root {
+    --main-text : #1B1B1B;
+    --main-bg-100 : #F6F8FC;
+    --main-bg-200 : #F7ECFF;
+    --main-bg-300 : #CBFEEC;
+    --max-size : 1240px;
+}
+
+body {
+    color: var(--main-text);
+}
+
+.container {
+    background-color: var(--main-bg-100);
+}
+
+h1 {
+    margin: 10px;
+    padding: 10px;
+}
+
+h2 {
+    margin-bottom: 5px;
+}
+
+.box {
+    background-color: var(--main-bg-100);
+    border-radius: 20px;
+    margin: 10px;
+    padding: 10px 15px;
+    box-shadow: 1px 0px 5px rgba(0,0,0,0.3);
+}
+
+.weather-container {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin: 10px;
+    gap: 10px;
+}
+
+.weather-container img {
+    width: 100px;
+    height: 100px;
+}
+
+
+.weather-container article div {
+    font-weight: bold;
+    line-height: 34px;
+}
+
+.weather-container .tempToday {
+    font-size: 38px;
+}
+
+.weather-container .weatherToday {
+    font-size: 30px;
+}
+
+.weather-container .regionCurrent {
+    font-size: 30px;
+}
+
+.weather-container .pollutionGroup {
+    display: flex;
+    gap: 10px;
+}
+
+.slider-container {
+    position: relative;
+    overflow: hidden;
+}
+
+.slider {
+    overflow: hidden;
+}  
+
+.slider-list {
+    display: flex;
+    transition: transform 0.3s ease-in-out;
+    padding: 0;
+    list-style: none;
+}
+
+.slider-list li {
+    // width: calc(100% / 3);
+    // flex: 0 0 calc(100% / 3);
+    flex-grow: 0;
+    flex-shrink: 0;
+    flex-basis: calc(100% / 5);
+    text-align: center;
+    position: relative;
+}
+
+.slider-list img {
+    padding: 5px;
+    width: 100%;
+    height: auto;
+    border-radius: 20px;
+    object-fit: cover;
+    aspect-ratio: 9 / 16;
+    max-height: 500px;
+}
+
+.slider-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+}  
+#prev-btn {
+    left: 0px;
+}
+
+#next-btn {
+    right: 0px;
+}
+
+.dday {
+    background-color: var(--main-bg-300);
+    color: red;
+    position: absolute;
+    font-size: 20px;
+    font-weight: bold;
+    right: 4px; top: 4px;
+    border-top-right-radius: 17px;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    padding: 5px 10px;
+}
+
+.nowshow:after {
+    content: '상영중';
+    background-color: var(--main-bg-200);
+    position: absolute;
+    font-size: 20px;
+    right: 4px; top: 4px;
+    border-top-right-radius: 17px;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    padding: 5px 10px;
+    font-weight: bold;
+}
+
+#todos {
+    display: flex;
+    flex-direction: column;
+}
+
+#todos li {
+    padding: 1px;
+    margin-top: 1px;
+}
+
+#todos li div {
+    outline: solid 1px gray;
+    border-radius: 10px;
+    display: inline-block;
+    padding: 0 10px;
+    box-shadow: 1px 0px 5px rgba(0,0,0,0.3);
+}
+
+#todos li input {
+    padding-left: 5px;
+}
+
+#todos li label {
+    padding-left: 5px;
+}
+
+#todos li input:checked + label {
+    text-decoration: line-through;
+
+}

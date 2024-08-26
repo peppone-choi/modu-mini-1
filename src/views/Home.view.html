@@ -1,4 +1,38 @@
-<load src="../components/Header.html" title="Hello" />
-<div>날씨 출력</div>
-<div>영화 출력</div>
-<div>할일 출력</div>
+<!-- <load src="../components/Header.html" title="피드" /> -->
+<!-- <h1>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ab sequi sit magni, dolore suscipit nam quos assumenda earum architecto numquam quam voluptates nisi quia iure vel nemo, fuga corporis delectus?</h1> -->
+
+<section class="box">
+    <h2>날씨</h2>
+    <div class="weather-container">
+        <img src="#" alt="weatherImage" id="weatherIcon">
+        <article>
+            <div id="temp" class="tempToday">온도</div>
+            <div id="weather" class="weatherToday">날씨</div>
+        </article>
+        <article>
+            <div id="region" class="regionCurrent">위치</div>
+            <div class="pollutionGroup">
+                <span>미세</span>
+                <div id="pollution">미세먼지</div>
+            </div>
+        </article>
+    </div>
+</section>
+
+<section class="box">
+    <h2>영화</h2>
+    <div class="slider-container">
+        <ul id="movies" class="slider-list">
+        </ul>
+        <button class="slider-btn" id="prev-btn">&#10094;</button>
+        <button class="slider-btn" id="next-btn">&#10095;</button>
+    </div>
+</section>
+
+<section class="box">
+    <h2>할일</h2>
+    <div class="todo-container">
+        <ul id="todos">
+        </ul>
+    </div>
+</section>

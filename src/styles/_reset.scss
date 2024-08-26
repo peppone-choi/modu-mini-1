@@ -30,3 +30,11 @@ button {
   border: none;
   background: none;
 }
+
+button:hover{
+  cursor: pointer;
+}
+
+ul,ol {
+  list-style: none;
+} 

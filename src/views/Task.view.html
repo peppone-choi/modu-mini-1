@@ -1,1 +1,99 @@
-<h2>Tasks</h2>
+<header>
+  <div>
+    <button class="back_home">
+      <img src="/img/icon_arrow_left.svg" alt="홈 돌아가기" />
+      <h1>Todo</h1>
+    </button>
+  </div>
+  <div>
+    <button class="add-task">
+      <h2>New Task</h2>
+      <img src="/img/icon_plus.svg" alt="Task 추가" />
+    </button>
+  </div>
+</header>
+
+<section>
+  <article>
+    <div class="today">
+      <h3>Today</h3>
+      <h3 id="today_date"></h3>
+    </div>
+    <script>
+      var Target = document.getElementById("today_date");
+      var time = new Date();
+
+      function today_date() {
+        var month = time.getMonth();
+        var date = time.getDate();
+        var day = time.getDay();
+
+        var hours = time.getHours();
+        var minutes = time.getMinutes();
+
+        Target.innerText = `${month + 1}월 ${date}일 ${hours < 10 ? `0${hours}` : hours}시 ${minutes < 10 ? `0${minutes}` : minutes}분`;
+      }
+      today_date();
+      setInterval(today_date);
+    </script>
+
+    <div class="calendar">
+      <button class="prev">
+        <img src="/img/icon_arrow_left.svg" alt="저번주" />
+      </button>
+      <div class="week last_week"></div>
+      <div class="calendar-container"></div>
+      <button class="next">
+        <img src="/img/icon_arrow_right.svg" alt="다음주" />
+      </button>
+      <div class="week next_week"></div>
+    </div>
+  </article>
+
+  <h2>Timeline</h2>
+  <article id="timeline"></article>
+</section>
+<div class="modal">
+  <div class="modal_body">
+    <h2>New Task</h2>
+    <table>
+      <tr>
+        <th>Task Name</th>
+        <td>
+          <input type="text" id="task-title" placeholder="테스크 이름을 입력하세요." />
+        </td>
+      </tr>
+      <tr>
+        <th>시작날짜</th>
+        <td>
+          <input type="date" id="start-date" name="start-date" value="2024-08-21" min="2024-01-01" max="2030-12-31" />
+        </td>
+      </tr>
+      <tr>
+        <th>종료날짜</th>
+        <td>
+          <input type="date" id="end-date" name="end-date" value="2024-08-21" min="2024-01-01" max="2030-12-31" />
+        </td>
+      </tr>
+      <tr>
+        <th>하루종일</th>
+        <td>
+          <input type="checkbox" name="allday" id="allday" />
+        </td>
+      </tr>
+      <tr>
+        <th>시작시간</th>
+        <td>
+          <input type="time" name="start-time" id="start-time" required />
+        </td>
+      </tr>
+      <tr>
+        <th>종료시간</th>
+        <td>
+          <input type="time" name="end-time" id="end-time" required />
+        </td>
+      </tr>
+    </table>
+    <button class="add-task-item" type="submit">추가</button>
+  </div>
+</div>

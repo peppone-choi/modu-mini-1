@@ -7,6 +7,7 @@ export default {
       input: {
         // 추가하고 싶은 페이지는 pages에서 추가하면 됨
         main: path.resolve(__dirname, "index.html"), // 홈
+        task: path.resolve(__dirname, "pages/tasks.html"), // 할일
       },
     },
   },

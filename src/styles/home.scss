@@ -14,7 +14,6 @@ body {
 
 .container {
     background-color: var(--main-bg-100);
-    // background-color: ;
 }
 
 h1 {
@@ -35,7 +34,6 @@ h2 {
 }
 
 .weather-container {
-    // background-color: gold;
     display: flex;
     justify-content: flex-start;
     align-items: center;
@@ -52,7 +50,6 @@ h2 {
 .weather-container article div {
     font-weight: bold;
     line-height: 34px;
-
 }
 
 .weather-container .tempToday {
@@ -74,15 +71,10 @@ h2 {
 
 .slider-container {
     position: relative;
-    // width: 100%;
-    // max-width: 900px;
-    // height: 350px;
-    // margin: 50px auto;
     overflow: hidden;
 }
 
 .slider {
-    // width: 100%;
     overflow: hidden;
 }  
 
@@ -91,7 +83,6 @@ h2 {
     transition: transform 0.3s ease-in-out;
     padding: 0;
     list-style: none;
-    // gap: 10px;
 }
 
 .slider-list li {
@@ -118,7 +109,6 @@ h2 {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    // height: 20px;
     background-color: rgba(0, 0, 0, 0.5);
     color: white;
     border: none;
@@ -159,4 +149,35 @@ h2 {
     border-bottom-right-radius: 5px;
     padding: 5px 10px;
     font-weight: bold;
+}
+
+#todos {
+    display: flex;
+    flex-direction: column;
+}
+
+#todos li {
+    padding: 1px;
+    margin-top: 1px;
+}
+
+#todos li div {
+    outline: solid 1px gray;
+    border-radius: 10px;
+    display: inline-block;
+    padding: 0 10px;
+    box-shadow: 1px 0px 5px rgba(0,0,0,0.3);
+}
+
+#todos li input {
+    padding-left: 5px;
+}
+
+#todos li label {
+    padding-left: 5px;
+}
+
+#todos li input:checked + label {
+    text-decoration: line-through;
+
 }

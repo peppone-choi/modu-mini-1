@@ -93,12 +93,17 @@ let currentSlideIndex: number = 0;
       elementItem.isCompleted = !elementItem.isCompleted;
       localStorage.setItem("todo", JSON.stringify(todoList));
     });
-    const spanElement = document.createElement("span");
+    const labelElement = document.createElement("label");
 
-    spanElement.textContent = elementItem.content;
+    inputElement.setAttribute("id", "inputId" + elementItem.id);
+    labelElement.textContent = elementItem.content;
+    labelElement.setAttribute("for", "inputId" + elementItem.id);
 
-    todoliElement.appendChild(inputElement);
-    todoliElement.appendChild(spanElement);
+    const divElement = document.createElement("div");
+    divElement.appendChild(inputElement);
+    divElement.appendChild(labelElement);
+
+    todoliElement.appendChild(divElement);
 
     element.todos.appendChild(todoliElement);
   });

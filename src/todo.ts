@@ -128,10 +128,10 @@ const renderTodo = () => {
             })`
       }</p>
       <button class="update" data-id="${todo.id}">
-        <img class="pencil" src="../icon_pencil.svg" alt="수정">
+        <img class="pencil" src="/img/icon_pencil.svg" alt="수정">
       </button>
       <button class="delete" data-id="${todo.id}">
-        <img class="trash_can" src="../icon_trash_can.svg" alt="삭제">
+        <img class="trash_can" src="/img/icon_trash_can.svg" alt="삭제">
       </button>
         </div>`;
     }

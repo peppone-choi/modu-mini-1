@@ -44,16 +44,19 @@ section {
   padding: 16px 0;
 }
 
-.prev, .next {
+.prev,
+.next {
   position: relative;
 }
 
-.prev img, .next img {
+.prev img,
+.next img {
   width: 32px;
   cursor: pointer;
 }
 
-.last_week, .next_week {
+.last_week,
+.next_week {
   display: none;
   position: absolute;
   margin-top: 26px;
@@ -82,10 +85,10 @@ section {
 }*/
 
 //.last_week:hover, .next_week:hover{
- // background-color: #383838;
-  //color: #fff;
-  //text-align: center;
-  //font-size: 14px;
+// background-color: #383838;
+//color: #fff;
+//text-align: center;
+//font-size: 14px;
 //}
 
 .calendar-container {
@@ -93,7 +96,6 @@ section {
   max-width: 1280px;
   min-width: 320px;
 }
-
 
 ul {
   display: flex;
@@ -104,7 +106,7 @@ ul {
 ul li {
   width: 40dvw;
   height: 160px;
-  background-color: white; 
+  background-color: white;
   border-radius: 30px;
   gap: 8px;
   position: relative;
@@ -235,11 +237,11 @@ section h2 {
   }
 
   input:checked + .check {
-    background-image: url("../../icon_check_on.svg");
+    background-image: url("/img/icon_check_on.svg");
   }
 
   input + .check {
-    background-image: url("../../icon_check_off.svg");
+    background-image: url("/img/icon_check_off.svg");
   }
 }
 
@@ -292,22 +294,22 @@ table th {
 }
 
 //수정
-.update img{
+.update img {
   width: 20px;
   height: 20px;
   margin: 0 8px;
 }
 
-.pencil:hover{
-  content: url("../../icon_pencil_hover.svg");
+.pencil:hover {
+  content: url("/img/icon_pencil_hover.svg");
 }
 
 .trash_can:hover {
-  content: url("../../icon_trash_can_hover.svg");
+  content: url("/img/icon_trash_can_hover.svg");
 }
 
 //삭제
-.delete img{
+.delete img {
   width: 20px;
   height: 20px;
 }
